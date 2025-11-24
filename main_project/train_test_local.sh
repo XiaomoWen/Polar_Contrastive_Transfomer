@@ -1,7 +1,7 @@
 name="FSRA"
 data_dir="datasets/University-Release/train"
 test_dir="datasets/University-Release/test"
-pretrain_path="/home/summer/Code/UAV-Satellite_Crossview_Matching/main_project/pretrain_model/vit_small_p16_224-15ec54c9.pth"
+pretrain_path="pretrain_model/vit_small_p16_224-15ec54c9.pth"
 gpu_ids=0
 num_worker=4
 lr=0.01
