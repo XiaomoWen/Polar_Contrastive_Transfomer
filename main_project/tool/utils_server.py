@@ -111,9 +111,12 @@ def load_network(opt):
     save_filename = opt.checkpoint
 
     if opt.views == 2:
-        model = two_view_net(opt.nclasses, block=opt.block)
+        model = two_view_net(opt,class_num=opt.nclasses, block=opt.block)
+        # python 的语法铁律：记得显式指定参数要放在最后面，如果混用语法糖就会报错
+        # eg: Right: three_view_net(opt, opt.nclasses, opt.droprate, block=opt.block)
+        #     Wrong: three_view_net(opt, block=opt.block, opt.nclasses, opt.droprate)
     elif opt.views == 3:
-        model = three_view_net(opt.nclasses, opt.droprate, block=opt.block)
+        model = three_view_net(opt, opt.nclasses, opt.droprate, block=opt.block)
 
     print('Load the model from %s'%save_filename)
     model.load_state_dict(torch.load(save_filename))

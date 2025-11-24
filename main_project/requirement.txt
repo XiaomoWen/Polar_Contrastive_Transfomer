@@ -1,8 +1,11 @@
 torch
 torchvision
+# pytorch 版本这里默认CPU版本，GPU版本需自己手动上官网找来安装
 pyyaml
 tqdm
 numpy
 scipy
 matplotlib
 pillow
+timm
+opencv-python-headless
