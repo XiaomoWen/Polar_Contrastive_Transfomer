@@ -1,4 +1,4 @@
-name="FSRA"
+name="USCM_ViT_small_local"
 data_dir="datasets/University-Release/train"
 test_dir="datasets/University-Release/test"
 pretrain_path="pretrain_model/vit_small_p16_224-15ec54c9.pth"

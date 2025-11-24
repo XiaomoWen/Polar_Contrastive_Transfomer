@@ -20,12 +20,18 @@ import warnings
 warnings.filterwarnings("ignore")
 from datasets.queryDataset import Dataset_query,Query_transforms
 
-#fp16
-try:
-    from apex.fp16_utils import *
-except ImportError: # will be 3.x series
-    print('This is not an error. If you want to use low precision, i.e., fp16, please install the apex with cuda support (https://github.com/NVIDIA/apex) and update pytorch to 1.0')
 ######################################################################
+# The use of fp16 has been disabled by default.
+# Because it is not necessary for pytorch 1.0 and later
+# If you need it due to limited GPU memory, please uncomment the following lines manually
+
+# try:
+#     from apex.fp16_utils import *
+#     from apex import amp, optimizers
+# except ImportError: # will be 3.x series
+#     print('This is not an error. If you want to use low precision, i.e., fp16, please install the apex with cuda support (https://github.com/NVIDIA/apex) and update pytorch to 1.0')
+######################################################################
+
 # Options
 # --------
 parser = argparse.ArgumentParser(description='Training')
