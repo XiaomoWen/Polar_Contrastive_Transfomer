@@ -1,0 +1,1 @@
+tree -I "University-Release|__pycache__|checkpoints|.git"

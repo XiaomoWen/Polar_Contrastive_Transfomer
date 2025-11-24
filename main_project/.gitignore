@@ -1,3 +1,4 @@
 checkpoints/FSRA
+checkpoints/USCM_ViT_small_local
 pretrain_model/*
 *.pyc

@@ -9,4 +9,4 @@ This is the code repository for the remote sensing project of the 2026 College S
 
 2.The official pre-trained model of Vision Transformer(Small) has not been upload,you should download it yourself through this website: https://drive.google.com/file/d/1-Rp-VAlUdb_dRbquyWhD6pdkhXYrwu-w/view, and copy it into the folder `main_project/pretrain_model` ( if there isn't a folder named this, create it by yourself and create a empty file named `__init__.py` in this folder.)
 
-3.Remember to change the document path in script `train_test_local.sh`.
+3.Remember to change the document path in script `train_test_local.sh`.(Some frequently-used super parameters are also explicitly specified in this script)

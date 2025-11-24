@@ -1,7 +1,8 @@
-name="USCM_ViT_small_local"
+# name="USCM_ViT_small_local"
+name="FSRA"
 data_dir="datasets/University-Release/train"
 test_dir="datasets/University-Release/test"
-pretrain_path="pretrain_model/vit_small_p16_224-15ec54c9.pth"
+pretrain_path="/home/fishros/Code/UAV-Satellite_Crossview_Matching/main_project/pretrain_model/vit_small_p16_224-15ec54c9.pth"
 gpu_ids=0
 num_worker=4
 lr=0.01
@@ -13,10 +14,8 @@ num_epochs=120
 pad=0
 views=2
 
-# export CUDA_VISIBLE_DEVICES='-1' # 强制使用CPU进行调试, 如果有GPU的话请注释掉此行
-
-python train.py --name $name --data_dir $data_dir --gpu_ids $gpu_ids --num_worker $num_worker --views $views --lr $lr \
---sample_num $sample_num --block $block --batchsize $batchsize --triplet_loss $triplet_loss --num_epochs $num_epochs --pretrain_path $pretrain_path\
+#python train.py --name $name --data_dir $data_dir --gpu_ids $gpu_ids --num_worker $num_worker --views $views --lr $lr \
+#--sample_num $sample_num --block $block --batchsize $batchsize --triplet_loss $triplet_loss --num_epochs $num_epochs --pretrain_path $pretrain_path\
 
 cd checkpoints/$name
 for((i=119;i<=$num_epochs;i+=10));

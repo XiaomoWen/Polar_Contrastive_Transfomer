@@ -1,4 +1,5 @@
 import torch
+import os
 import torch.nn as nn
 from .backbones.vit_pytorch import vit_small_patch16_224_FSRA
 import torch.nn.functional as F
@@ -99,7 +100,11 @@ class build_transformer(nn.Module):
 
             self.transformer = vit_small_patch16_224_FSRA(img_size=(256,256), stride_size=[16, 16], drop_path_rate=0.1,
                                                             drop_rate= 0.0, attn_drop_rate=0.0)
-            self.transformer.load_param(model_path)
+            if os.path.exists(model_path):
+                self.transformer.load_param(model_path)
+            else:
+                print(f"Warning: Pretrain model {model_path} not found. Skipping initialization.")
+
         elif opt.backbone=="VAN-S":
             self.transformer = van_small()
             checkpoint = torch.load(opt.pretrain_path)["state_dict"]
