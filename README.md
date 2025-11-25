@@ -1,9 +1,9 @@
-# UAV-Satellite_Crossview_Matching
+# Polar Contrastive Transformer Network (PCT-Net)
 **Author: XiaomoWen, NJUST-Automation** 
 
 This is the code repository for the remote sensing project of the 2026 College Students' Innovation and Enterprenuership Competition. The copyright belongs to the team led by Professor Bai Hongyang from the School of Energy and Engineering, NJUST.
 
-## Notice(There are some points you must read before running code)
+### Notice(There are some points you must read before running code)
 
 1.The dataset "University-1652" has not been upload, you should download it yourself through this website: https://drive.google.com/file/d/1iVnP4gjw-iHXa0KerZQ1IfIO0i1jADsR/view.
 
