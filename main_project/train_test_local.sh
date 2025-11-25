@@ -1,4 +1,4 @@
-name="PCT-Net"
+name="PCT"
 # PCT-Net means "Polar Contrastive Transformer Network"
 data_dir="datasets/University-Release/train"
 test_dir="datasets/University-Release/test"

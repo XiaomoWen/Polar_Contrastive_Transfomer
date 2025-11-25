@@ -39,7 +39,7 @@ def get_parse():
     parser = argparse.ArgumentParser(description='Training')
     parser.add_argument('--gpu_ids',default='0', type=str,help='gpu_ids: e.g. 0  0,1,2  0,2')
     parser.add_argument('--name',default='test', type=str, help='output model name')
-    parser.add_argument('--data_dir',default='/home/dmmm/University-Release/train',type=str, help='training dir path')
+    parser.add_argument('--data_dir',default='University-Release/train',type=str, help='training dir path')
     parser.add_argument('--train_all', action='store_true', help='use all training data' )
     parser.add_argument('--color_jitter', action='store_true', help='use color jitter in training' )
     parser.add_argument('--num_worker', default=6,type=int, help='' )
