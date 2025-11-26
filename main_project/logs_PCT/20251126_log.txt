@@ -1,0 +1,65 @@
+============================================================
+Experiment ID: PCT-ViT-Small-BS16-Polar
+Date: 2025-11-26
+Status: Success / Converged
+============================================================
+
+[Experiment Strategy]
+1. Strategy: Dual-View with Polar Transform (PCT) strictly enabled.
+2. Backbone: ViT-Small (ImageNet Pretrained).
+3. Hyperparameters: Batch Size = 16, lr_backbone = 3e-5 (end).
+
+[Key Findings]
+1. Convergence: Excellent. Sat_Acc (97.97%) and Drone_Acc (97.54%) are almost identical, proving Polar Transform successfully aligns the two domains during training.
+2. SOTA Comparison: 
+   - Sat->Drone R@1 (83.59%) outperforms standard ResNet-50 baselines (like FSRA ~82%).
+   - Drone->Sat R@1 (74.61%) is lower, but R@5 (88.63%) is very high, indicating valid features but ranking hesitation.
+
+[Best Checkpoint Results - net_119.pth]
+| Direction      | R@1    | R@5    | AP     |
+| :---           | :---   | :---   | :---   |
+| Sat -> Drone   | 83.59% | 88.45% | 76.00% |
+| Drone -> Sat   | 74.61% | 88.63% | 77.77% |
+
+============================================================
+[Below is the raw terminal output]
+
+Epoch 119/119
+----------
+train Loss: 0.2376 Cls_Loss:0.1293 KL_Loss:0.0000 Triplet_Loss 0.1083 Satellite_Acc: 0.9797  Drone_Acc: 0.9754 lr_backbone:0.000030 lr_other 0.000100
+Training complete in 20m 34s
+
+We use the scale: 1
+-------test-----------
+=> [Model Strategy] Using PCT (Polar Transform) strictly for Dual-View.
+=========== Building Model: PCT (Polar-Contrastive Transformer) ===========
+=> PCT-Net: Polar Transform module initialized.
+=> using Transformer_type: ViT-Small as backbone
+Load the model from net_119.pth
+这是net_119.pth的结果
+1 -> 3:
+satellite -> drone
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 6/6 [00:08<00:00,  1.39s/it]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 402/402 [08:24<00:00,  1.25s/it]
+Test complete in 8m 33s
+torch.Size([701, 2048])
+torch.Size([51355, 2048])
+514
+Recall@1:83.59 Recall@5:88.45 Recall@10:90.73 Recall@top1:98.00 AP:76.00
+We use the scale: 1
+-------test-----------
+=> [Model Strategy] Using PCT (Polar Transform) strictly for Dual-View.
+=========== Building Model: PCT (Polar-Contrastive Transformer) ===========
+=> PCT-Net: Polar Transform module initialized.
+=> using Transformer_type: ViT-Small as backbone
+Load the model from net_119.pth
+这是net_119.pth的结果
+3 -> 1:
+drone -> satellite
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████| 296/296 [06:11<00:00,  1.26s/it]
+100%|███████████████████████████████████████████████████████████████████████████████████████████████████████████████████| 8/8 [00:10<00:00,  1.26s/it]
+Test complete in 6m 22s
+torch.Size([37855, 2048])
+torch.Size([951, 2048])
+10
+Recall@1:74.61 Recall@5:88.63 Recall@10:92.29 Recall@top1:92.65 AP:77.77

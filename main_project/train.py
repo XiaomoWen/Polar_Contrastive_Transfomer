@@ -288,5 +288,5 @@ if __name__ == '__main__':
     # if opt.fp16:
     #     model, optimizer_ft = amp.initialize(model, optimizer_ft, opt_level="O1")
 
-
+    print('---------- Start Training, awaiting completion -------------')
     train_model(model,opt, optimizer_ft, exp_lr_scheduler,dataloaders,dataset_sizes)

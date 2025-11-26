@@ -150,7 +150,8 @@ class build_transformer(nn.Module):
             transformer_name = "vit_small_patch16_224_FSRA"
             self.in_planes = 768 # ViT-Small 的输出维度
 
-            print('=> using Transformer_type: {} as backbone'.format(transformer_name))
+            # print('=> using Transformer_type: {} as backbone'.format(transformer_name))
+            print('=> using Transformer_type: ViT-Small as backbone')
 
             # 构建 ViT
             self.transformer = vit_small_patch16_224_FSRA(

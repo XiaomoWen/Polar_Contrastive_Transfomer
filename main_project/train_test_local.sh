@@ -2,13 +2,13 @@ name="PCT"
 # PCT-Net means "Polar Contrastive Transformer Network"
 data_dir="datasets/University-Release/train"
 test_dir="datasets/University-Release/test"
-pretrain_path="/home/fishros/Code/UAV-Satellite_Crossview_Matching/main_project/pretrain_model/vit_small_p16_224-15ec54c9.pth"
+pretrain_path="/home/fishros/Code/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_p16_224-15ec54c9.pth"
 gpu_ids=0
 num_worker=4
 lr=0.01
 sample_num=1
 block=3
-batchsize=8
+batchsize=16
 triplet_loss=0.3
 num_epochs=120
 pad=0

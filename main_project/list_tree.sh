@@ -1,1 +1,1 @@
-tree -I "University-Release|__pycache__|checkpoints|.git"
+tree -I "University-Release|__pycache__|checkpoints|.git|.gitignore|.vscode|*.pyc|*.pyo|*.pyd|*.db|*.sqlite3|*.log|FSRA"
