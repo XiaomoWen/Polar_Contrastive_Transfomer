@@ -147,20 +147,37 @@ def which_view(name):
         print('unknown view')
     return -1
 
-def extract_feature(model,dataloaders, view_index = 1):
+def extract_feature(model, dataloaders, view_index=1, rotate_angle=0):
     features = torch.FloatTensor()
     count = 0
+    # 打印一下当前是否开启了旋转测试，方便确认
+    if rotate_angle != 0:
+        print(f"⚠️ [Robustness Test] Applying Rotation: {rotate_angle} degrees to view_index {view_index}")
+    else:
+        print("==> No rotation applied during feature extraction.")
+
     for data in tqdm(dataloaders):
         img, label = data
         n, c, h, w = img.size()
         count += n
+        
+        # --- [修改核心] 旋转鲁棒性测试逻辑 ---
+        # 逻辑：只对 Drone 视图 (view_index == 3) 进行旋转
+        # 如果你想测试 Satellite 旋转，就把 3 改成 1
+        if rotate_angle != 0 and view_index == 3: 
+            # 这是一个 batch 的图片，我们需要逐张或者批量旋转
+            # F_trans.rotate 支持 Tensor (C x H x W)，我们可以直接对 batch 操作
+            # 官方 rotate 支持 img tensor，但最好确保它是 Tensor 格式
+            # 注意：transforms.functional.rotate 默认是逆时针旋转
+            img = F_trans.rotate(img, rotate_angle) 
+        # ------------------------------------
+
         for i in range(2):
             if(i==1):
                 img = fliplr(img)
             input_img = Variable(img.cuda())
             for scale in ms:
                 if scale != 1:
-                    # bicubic is only  available in pytorch>= 1.1
                     input_img = nn.functional.interpolate(input_img, scale_factor=scale, mode='bilinear', align_corners=False)
                 if opt.views ==2:
                     if view_index == 1:
@@ -189,7 +206,6 @@ def extract_feature(model,dataloaders, view_index = 1):
 
         features = torch.cat((features,ff.data.cpu()), 0)
     return features
-
 
 def get_id(img_path):
     camera_id = []
@@ -246,8 +262,8 @@ query_label, query_path  = get_id(query_path)
 
 if __name__ == "__main__":
     with torch.no_grad():
-        query_feature = extract_feature(model,dataloaders[query_name], which_query)
-        gallery_feature = extract_feature(model,dataloaders[gallery_name], which_gallery)
+        query_feature = extract_feature(model,dataloaders[query_name], which_query, rotate_angle=0)
+        gallery_feature = extract_feature(model,dataloaders[gallery_name], which_gallery, rotate_angle=0)
 
     # For street-view image, we use the avg feature as the final feature.
     '''

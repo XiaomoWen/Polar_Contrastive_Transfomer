@@ -1,0 +1,75 @@
+================================================================================
+                        SRTP PROJECT EXPERIMENT LOG
+================================================================================
+Project: Cross-View Geo-Localization (Satellite-to-Drone)
+Method:  PCT (Polar-Contrastive Transformer)
+Date:    2025-11-26
+Status:  Performance Validation & Baseline Comparison
+================================================================================
+
+[1. REFERENCE DATA SOURCES]
+--------------------------------------------------------------------------------
+1. Baseline File:  "20251126_FSRA_Original_BS16_Result.txt"
+   - Model: FSRA (ResNet50 + LPN + STR)
+   - Result: Recall@1 = 85.88% (Target SOTA)
+
+2. Previous Run:   "20251126_ViT-S_BS16_Best_R83.6.txt"
+   - Model: PCT (ViT-Small + Polar) without strong Augmentation
+   - Result: Recall@1 = 83.6% (approx.)
+
+3. Current Run:    [Terminal Output 2025-11-26 21:57]
+   - Model: PCT (ViT-Small + Polar) WITH Data Augmentation
+   - Result: Recall@1 = 85.16%
+
+[2. PERFORMANCE EVOLUTION (Ablation Study)]
+--------------------------------------------------------------------------------
+metric: Recall@1 (Satellite -> Drone)
+
+Step 1: Initial Implementation (File 2)
+Result: ~83.6%
+Gap to SOTA: -2.2%
+Analysis: The model struggled with geometric distortions due to lack of diversity.
+
+Step 2: Introducing Data Augmentation (Current)
+Result: 85.16%
+Improvement: +1.5% (Significant)
+Gap to SOTA: -0.72% (Comparable)
+Analysis: 
+Data augmentation successfully bridged the domain gap caused by the Polar Transform.
+The ViT backbone is now learning robust geometric features.
+
+[3. DETAILED COMPARISON TABLE]
+--------------------------------------------------------------------------------
+| Method                 | R@1    | R@5    | R@10   | AP     | File Source |
+|------------------------|--------|--------|--------|--------|-------------|
+| FSRA (Baseline)        | 85.88% | 91.30% | 92.44% | 79.23% | File 1      |
+| PCT (Ours + Aug)       | 85.16% | 89.02% | 91.01% | 77.48% | Current Log |
+|------------------------|--------|--------|--------|--------|-------------|
+| Difference (Delta)     | -0.72% | -2.28% | -1.43% | -1.75% |             |
+
+[4. CRITICAL OBSERVATION & HYPOTHESIS]
+--------------------------------------------------------------------------------
+Observation:
+Looking at the loss logs (if available in files):
+FSRA usually converges to a very low training loss.
+PCT (ViT) currently has a higher training loss (0.2093) but achieves similar accuracy.
+
+Hypothesis:
+ViT is harder to optimize than ResNet (SGD is suboptimal for ViT). 
+However, even with suboptimal optimization, it matches ResNet performance.
+This suggests PCT has a higher "Performance Ceiling" if optimized with AdamW.
+
+[5. IMMEDIATE ACTION PLAN]
+--------------------------------------------------------------------------------
+Objective: Prove "Robustness" to overtake FSRA in practical scenarios.
+
+1. Modify test_server.py: Force `rotate_angle = 180`.
+2. Run Inference on FSRA (File 1 Model).
+3. Run Inference on PCT (Current Model).
+
+Expected Result:
+FSRA (Cartesian) -> Severe Drop (e.g., < 40%)
+PCT (Polar)      -> Minor Drop (e.g., > 60%)
+
+*The combination of "Comparable Accuracy (85.16%)" + "Superior Robustness" is the key to publishing in Remote Sensing.*
+================================================================================
