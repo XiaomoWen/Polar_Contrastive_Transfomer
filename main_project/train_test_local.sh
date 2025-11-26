@@ -5,10 +5,14 @@ test_dir="datasets/University-Release/test"
 pretrain_path="/home/fishros/Code/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_p16_224-15ec54c9.pth"
 gpu_ids=0
 num_worker=4
-lr=0.01
+lr=0.03 
+# It seems that lr=0.01 is suitable for batchsize = 8 (On NVIDIA RTX 4070 Laptop GPU)
+# When you change the batchsize, you may need to adjust the learning rate accordingly.
+# Apply Linear Scaling Rule: Scale learning rate linearly with batch size.
+# For example, when batchsize=16, lr=0.02 may be better.
 sample_num=1
 block=3
-batchsize=16
+batchsize=24
 triplet_loss=0.3
 num_epochs=120
 pad=0

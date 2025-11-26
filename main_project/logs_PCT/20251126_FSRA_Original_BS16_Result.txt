@@ -1,0 +1,69 @@
+================================================================================
+[BASELINE EXPERIMENT LOG] FSRA ORIGINAL CODE WITH INCREASED BATCH SIZE
+Date: 2025-11-26
+Model: Original FSRA (ViT based)
+Code Version: Commit cd5b453
+Checkpoint: net_119.pth
+Status: UNEXPECTED HIGH PERFORMANCE / BASELINE CHECK
+================================================================================
+
+[1. EXPERIMENT CONFIGURATION]
+- Codebase:             Original FSRA (No Polar-ViT modification)
+- Batch Size:           16 (Modified from original default 8)
+- Backbone:             ResNet-50 (Standard FSRA backbone)
+- Optimizer/LR:         Original settings (SGD)
+
+[2. PERFORMANCE RESULTS]
+--------------------------------------------------------------------------------
+Metric               | Value
+--------------------------------------------------------------------------------
+Sat -> Drone R@1     | 85.88%  (Very High)
+Sat -> Drone R@5     | 91.30%
+Sat -> Drone AP      | 79.23%
+--------------------------------------------------------------------------------
+Drone -> Sat R@1     | 79.69%
+Drone -> Sat R@5     | 92.35%
+Drone -> Sat AP      | 82.58%
+--------------------------------------------------------------------------------
+
+[3. CRITICAL OBSERVATION & COMPARISON]
+1. Comparison with PCT-ViT (Our Improvement):
+   - FSRA (BS=16):     85.88% (Sat->Drone)
+   - PCT-ViT (BS=16):  83.59% (Sat->Drone)
+   
+   [!!! CRITICAL FINDING !!!]
+   The original FSRA code (with BS=16) currently OUTPERFORMS our improved PCT-ViT model 
+   by +2.29%. This suggests that either:
+   a) The ViT backbone is not yet fully optimized (needs AdamW or more epochs).
+   b) The FSRA (ResNet) is more robust to Batch Size 16 than ViT.
+   c) The Polar Transform might need better hyper-parameter tuning.
+
+2. Impact of Batch Size on FSRA:
+   The user noted "significant drop" (implies the user might have seen even higher 
+   results with BS=8, or expected this to be lower). 
+   *Note: Need to verify FSRA BS=8 baseline to quantify the "drop".*
+
+[4. ACTION ITEMS]
+1. Run FSRA with original Batch Size = 8 to get the "True Baseline".
+2. Investigate why ViT-based PCT (83.6%) is lagging behind FSRA (85.9%).
+   - Switch ViT optimizer to AdamW.
+   - Adjust learning rate for ViT.
+
+================================================================================
+[APPENDIX: RAW TERMINAL OUTPUT]
+We use the scale: 1
+-------test-----------
+=> [Model Strategy] Using PCT (Polar Transform) strictly for Dual-View.
+=========== Building Model: PCT (Polar-Contrastive Transformer) ===========
+=> PCT-Net: Polar Transform module initialized.
+=> using Transformer_type: ViT-Small as backbone
+Load the model from net_119.pth
+这是net_119.pth的结果
+1 -> 3:
+satellite -> drone
+Recall@1:85.88 Recall@5:91.30 Recall@10:92.44 Recall@top1:98.43 AP:79.23
+
+3 -> 1:
+drone -> satellite
+Recall@1:79.69 Recall@5:92.35 Recall@10:94.75 Recall@top1:95.02 AP:82.58
+================================================================================

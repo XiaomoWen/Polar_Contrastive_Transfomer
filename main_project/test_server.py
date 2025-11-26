@@ -19,6 +19,8 @@ from tqdm import tqdm
 import warnings
 warnings.filterwarnings("ignore")
 from datasets.queryDataset import Dataset_query,Query_transforms
+from torchvision.transforms import functional as F_trans
+import random
 
 ######################################################################
 # The use of fp16 has been disabled by default.
