@@ -64,6 +64,7 @@ def get_parse():
     parser.add_argument('--steps', default=[70,110], type=int, help='' )
     parser.add_argument('--backbone', default="VIT-S", type=str, help='' )
     parser.add_argument('--pretrain_path', default="", type=str, help='' )
+    parser.add_argument('--warmup_epochs', default=10, type=int, help='number of warmup epochs for lr scheduler' )
     opt = parser.parse_args()
     return opt
 
@@ -246,7 +247,7 @@ def train_model(model,opt, optimizer, scheduler, dataloaders,dataset_sizes):
             # deep copy the model
             if phase == 'train':
                 scheduler.step()
-            if epoch % 10 == 9 and epoch>=110:
+            if epoch % 10 == 9 and epoch>=119 and epoch != 129:
                 save_network(model, opt.name, epoch)
 
         time_elapsed = time.time() - since

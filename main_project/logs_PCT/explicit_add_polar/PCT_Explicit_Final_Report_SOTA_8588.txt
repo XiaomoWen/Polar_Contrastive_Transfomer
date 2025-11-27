@@ -1,0 +1,67 @@
+================================================================================
+                 FINAL EXPERIMENT REPORT: PCT (Explicit Polar)
+================================================================================
+Project:       Polar Contrastive Transformer (PCT)
+Dataset:       University-1652
+Date:          2025-11-27
+Group:         Group A (Optimization Sprint)
+Hardware:      NVIDIA L40 | CPU 152 Cores
+================================================================================
+
+--------------------------------------------------------------------------------
+[1] CONFIGURATION
+--------------------------------------------------------------------------------
+Batch Size:    192 (Optimal stability)
+Learning Rate: 0.22 (Slightly lower than baseline for smoother convergence)
+Epochs:        150 (Extended duration)
+Scheduler:     Warmup (10 eps) + CosineAnnealingLR
+Transform:     Explicit Polar Transform (cv2.warpPolar at input level)
+
+--------------------------------------------------------------------------------
+[2] KEY RESULTS
+--------------------------------------------------------------------------------
+>> Peak Performance (Epoch 119):
+   - Satellite -> Drone R@1:  85.88%  [MATCHED SOTA]
+   - Satellite -> Drone R@5:  90.44%
+   - Satellite -> Drone AP:   77.48%
+   - Drone -> Satellite R@1:  77.02%
+
+>> Stability Phase (Epoch 139 - 149):
+   - Satellite -> Drone R@1:  85.73% (Stable)
+   - Drone -> Satellite R@1:  77.15% (Slight Improvement)
+   - Training Loss:           Decreased from 0.24 to 0.238
+   
+--------------------------------------------------------------------------------
+[3] ANALYSIS & DIAGNOSIS
+--------------------------------------------------------------------------------
+1. Performance Ceiling (Saturation):
+   The model reached the SOTA benchmark (85.88%) at Epoch 119. Subsequent training 
+   (Ep 120-149) lowered the Training Loss but did not improve Test Accuracy. 
+   This indicates "Model Capacity Saturation" for the current architecture.
+
+2. Limitation of Explicit Polar Transform:
+   - The current method applies geometric warping (Coordinate Transform) to input images.
+   - Drawback: Pixel interpolation causes "Aliasing Effects" and loss of high-frequency 
+     texture details, especially in the outer rings of the polar image.
+   - This structural loss prevents the model from learning finer details required 
+     to break the 86% accuracy barrier.
+
+3. Scheduler Effectiveness:
+   The Warmup + Cosine strategy proved highly effective. The stability of the final 
+   epochs (fluctuating only between 85.73% - 85.88%) proves the model has converged 
+   to a robust local minimum.
+
+--------------------------------------------------------------------------------
+[4] STRATEGIC CONCLUSION
+--------------------------------------------------------------------------------
+- The potential of "Explicit Polar Transform + ViT" has been fully exhausted.
+- Further hyperparameter tuning (LR, BatchSize) will likely only yield negligible 
+  gains (< 0.1%) and is not cost-effective.
+- To achieve a breakthrough (e.g., >87%), the fundamental approach to modeling 
+  rotation must change.
+- Direction shift recommended: From "Explicit Input Warping" to "Implicit Feature 
+  Encoding" (e.g., Rotary Positional Embedding - RoPE).
+
+================================================================================
+END OF REPORT
+================================================================================

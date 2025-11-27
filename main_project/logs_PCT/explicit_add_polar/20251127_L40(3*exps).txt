@@ -1,0 +1,79 @@
+================================================================================
+                           PCT EXPERIMENT LOG REPORT
+================================================================================
+Project:       Polar Contrastive Transformer (PCT)
+                but only take module "Polar Transform" for test!!!
+                It means that this is a ablation experiment!!
+
+Dataset:       University-1652
+Date:          2025-11-27
+Hardware:      NVIDIA L40 (48GB) | CPU 152 Cores
+Target Metric: Satellite -> Drone Recall@1 (Current SOTA: 85.88%)
+Author:        Xiaomo Wen
+================================================================================
+
+--------------------------------------------------------------------------------
+[PART 1] HISTORICAL EXPERIMENTS SUMMARY (DIAGNOSIS)
+--------------------------------------------------------------------------------
+
+>> Round 1: The Baseline (Benchmark High)
+-----------------------------------------
+Config:     BatchSize=192 | LR=0.24 | Epochs=120 | Scheduler=StepLR
+Result:     Sat->Drone R@1: 85.73%
+Diagnosis:  
+  - [Positive] Best performance so far. Best generalization.
+  - [Negative] StepLR failed to lower LR significantly at the very end.
+  - [Conclusion] BS=192 is the "Sweet Spot" for this dataset.
+
+>> Round 2: The Underfit Case
+-----------------------------------------
+Config:     BatchSize=256 | LR=0.20 | Epochs=120 | Scheduler=StepLR
+Result:     Sat->Drone R@1: 85.31% | Train Acc dropped to ~72%
+Diagnosis:  
+  - [Negative] Increased BS reduced total iterations significantly.
+  - [Negative] LR=0.20 was too conservative for such a large batch.
+  - [Conclusion] Model underfitting due to insufficient training steps.
+
+>> Round 3: The Overfit Case
+-----------------------------------------
+Config:     BatchSize=256 | LR=0.32 | Epochs=180 | Scheduler=Warmup+Cosine
+Result:     Sat->Drone R@1: 85.31% (Peak at Ep 159)
+Diagnosis:  
+  - [Positive] Training Loss reached historical low (0.21).
+  - [Negative] Test accuracy plateaued/decreased despite low train loss.
+  - [Conclusion] Linear Scaling Rule (LR=0.32) proved too aggressive for single-GPU, 
+    leading to sharp minima and poor generalization. 180 Epochs was overkill.
+
+--------------------------------------------------------------------------------
+[PART 2] CURRENT OPTIMIZATION STRATEGY (ROUND 4 - SOTA SPRINT)
+--------------------------------------------------------------------------------
+Objective:  Combine the stability of Round 1 (BS=192) with the superior convergence 
+            of Round 3's Scheduler (Cosine).
+Strategy:   A/B Testing on Learning Rate and Epochs.
+
+>> Group A: Stability & Fine-Tuning (Conservative)
+-----------------------------------------
+Config:     BatchSize=192 | LR=0.22 | Epochs=150 | Scheduler=Warmup+Cosine
+Hypothesis: Lower LR + Longer Decay = Flatter Minima (Better Generalization).
+
+>> Group B: Replication & Extension (Aggressive)
+-----------------------------------------
+Config:     BatchSize=192 | LR=0.24 | Epochs=140 | Scheduler=Warmup+Cosine
+Hypothesis: Replicates Round 1's best LR but fixes the "undercooked" ending 
+            with Cosine decay and slight epoch increase.
+
+--------------------------------------------------------------------------------
+[PART 3] RESULTS LOG (TO BE FILLED)
+--------------------------------------------------------------------------------
+
+| Experiment ID | BS  | LR   | Epochs | Sat->Drone R@1 | Drone->Sat R@1 | AP    | Status     |
+| :---          | :-- | :--- | :---   | :---           | :---           | :---  | :---       |
+| Round 1 (Ref) | 192 | 0.24 | 120    | 85.73%         | -              | -     | Baseline   |
+| Group A       | 192 | 0.22 | 150    |                |                |       | Running... |
+| Group B       | 192 | 0.24 | 140    |                |                |       | Running... |
+
+================================================================================
+Notes & Observations:
+- 
+- 
+================================================================================
