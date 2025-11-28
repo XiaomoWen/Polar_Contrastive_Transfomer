@@ -65,6 +65,8 @@ def get_parse():
     parser.add_argument('--backbone', default="VIT-S", type=str, help='' )
     parser.add_argument('--pretrain_path', default="", type=str, help='' )
     parser.add_argument('--warmup_epochs', default=10, type=int, help='number of warmup epochs for lr scheduler' )
+    parser.add_argument('--save_epoch_freq', type=int, default=10, help='frequency of saving checkpoints at the end of epochs')
+    parser.add_argument('--save_start_epoch', type=int, default=120, help='the epoch to start saving checkpoints')
     opt = parser.parse_args()
     return opt
 
@@ -247,8 +249,11 @@ def train_model(model,opt, optimizer, scheduler, dataloaders,dataset_sizes):
             # deep copy the model
             if phase == 'train':
                 scheduler.step()
-            if epoch % 10 == 9 and epoch>=119 and epoch != 129:
-                save_network(model, opt.name, epoch)
+
+            current_epoch_count = epoch + 1 
+            if current_epoch_count % opt.save_epoch_freq == 0 and current_epoch_count >= opt.save_start_epoch:
+                print(f'saving the model at the end of epoch {epoch}, it is the {current_epoch_count}th epoch')
+                save_network(model, opt.name, current_epoch_count)
 
         time_elapsed = time.time() - since
         print('Training complete in {:.0f}m {:.0f}s'.format(
