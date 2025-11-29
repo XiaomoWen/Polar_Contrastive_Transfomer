@@ -95,7 +95,8 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
 
         running_corrects = 0  # 用于计算 train_acc（top‑1）
 
-        for data, data2, data3 in dataloaders:
+        # 使用 enumerate 以便获取 batch 索引
+        for batch_idx, (data, data2, data3) in enumerate(dataloaders):
             loss = 0.0
             inputs, labels = data
             inputs2, labels2 = data2
@@ -135,11 +136,19 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
                 f_triplet_loss = cal_triplet_loss(
                     features, features2, labels, triplet_loss_fn, split_num
                 )
+                # 此时 outputs 变成了 tuple(logits, feat)，我们需要把 logits 取出来覆盖 outputs
                 outputs, outputs2 = outputs[0], outputs2[0]
             else:
-                outputs, outputs2 = outputs[0], outputs2[0]
+                # 如果没有 triplet loss，模型输出依然是 tuple，也需要取出 logits
+                if isinstance(outputs, (list, tuple)):
+                    outputs = outputs[0]
+                if isinstance(outputs2, (list, tuple)):
+                    outputs2 = outputs2[0]
+                if opt.views == 3 and isinstance(outputs3, (list, tuple)):
+                    outputs3 = outputs3[0]
 
             # ---------- 分类损失 + KL ----------
+            # 注意：经过上面的处理，outputs 已经是 logits Tensor 了
             if opt.views == 2:
                 cls_loss = cal_loss(outputs, labels, criterion) + \
                            cal_loss(outputs2, labels3, criterion)
@@ -167,10 +176,27 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
             running_triplet += f_triplet_loss.item() * now_batch_size
             running_kl_loss += kl_loss.item() * now_batch_size
 
-            # 计算 top‑1 训练准确率（用 outputs 对 labels）
+            # ---------- 计算准确率 (修复了 TypeError) ----------
             with torch.no_grad():
-                _, preds = torch.max(outputs, 1)
-                running_corrects += torch.sum(preds == labels).item()
+                # 再次做安全检查，确保 score 是 Tensor
+                if isinstance(outputs, (list, tuple)):
+                    score = outputs[0]
+                else:
+                    score = outputs
+                
+                _, preds = torch.max(score, 1)
+                batch_correct = torch.sum(preds == labels).item()
+                running_corrects += batch_correct
+
+            # ---------- [新增] 实时打印 (每20个batch打印一次) ----------
+            if (batch_idx + 1) % 20 == 0:
+                print("  Step[{}/{}] Loss: {:.4f} (Cls: {:.3f} Tri: {:.3f}) Acc: {:.2f}%".format(
+                    batch_idx + 1, len(dataloaders),
+                    loss.item(),
+                    cls_loss.item(),
+                    f_triplet_loss.item(),
+                    (batch_correct / now_batch_size) * 100
+                ))
 
         # ----------------- 每个 Epoch 的汇总打印 -----------------
         if total_samples == 0:

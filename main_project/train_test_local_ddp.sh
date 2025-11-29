@@ -9,7 +9,7 @@ data_dir="datasets/University-Aug/train"
 test_dir="datasets/University-Aug/test"
 
 # 预训练权重路径 (确保路径正确)
-pretrain_path="/home/summer/Code/UAV-Satellite_Crossview_Matching/main_project/pretrain_model/vit_small_p16_224-15ec54c9.pth"
+pretrain_path="/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_p16_224-15ec54c9.pth"
 
 # 显卡设置
 # 这里的 gpu_ids 用于指定 torchrun 使用哪些卡，例如 "0,1,2,3,4,5,6,7"

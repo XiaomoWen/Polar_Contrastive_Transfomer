@@ -1,0 +1,35 @@
+================= CONFIG =================
+name="PCT"
+data_dir="/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/datasets/University-Release/train"
+test_dir="/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/datasets/University-Release/test"
+pretrain_path="/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth"
+gpu_ids=0
+num_worker=8
+lr=0.001
+# Apply Linear Scaling Rule when you change batchsize.
+sample_num=1
+block=3
+batchsize=64
+triplet_loss=0.3
+num_epochs=120
+pad=0
+views=2
+warmup_epochs=10
+save_epoch_freq=10
+save_start_epoch=90
+backbone="VIT-S-RoPE-OFFICIAL"
+use_autocast=true
+=========================================
+
+===== Environment Info =====
+Date: 2025年 11月 30日 星期日 01:44:39 CST
+Host: ps
+GPU: NVIDIA L40, 46068 MiB, 565.57.01
+CUDA: (nvcc not found, likely CUDA runtime only)
+PyTorch: 2.1.2+cu121
+Python: Python 3.8.20
+-----------------------------
+======= [1/2] TRAINING START =======
+✅ Training completed in 0 minutes.
+
+======= [2/2] TESTING START =======
