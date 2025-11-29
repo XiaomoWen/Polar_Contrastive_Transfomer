@@ -15,7 +15,7 @@ pretrain_path="/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_proje
 # ---------------- 训练参数设置 (针对 L40 调优) ----------------
 gpu_ids=0
 num_worker=16          # L40 机器一般 CPU 也不错，可以开多点
-lr=0.002
+lr=0.0015
 sample_num=1
 block=3
 batchsize=192            # 如果显存有压力可以改为 48 或 32
