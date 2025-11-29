@@ -79,12 +79,21 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
     triplet_loss_fn = Tripletloss(margin=opt.triplet_loss)
 
     for epoch in range(num_epochs):
+        epoch_start = time.time()
         print('Epoch {}/{}'.format(epoch, num_epochs - 1))
         print('-' * 10)
 
+        # ----------------- 训练模式 -----------------
         model.train(True)
-        running_cls_loss = running_triplet = running_kl_loss = running_loss = 0.0
-        running_corrects = running_corrects2 = running_corrects3 = 0.0
+
+        # 统计量
+        running_cls_loss = 0.0
+        running_triplet = 0.0
+        running_kl_loss = 0.0
+        running_loss = 0.0
+        total_samples = 0
+
+        running_corrects = 0  # 用于计算 train_acc（top‑1）
 
         for data, data2, data3 in dataloaders:
             loss = 0.0
@@ -95,10 +104,15 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
             now_batch_size = inputs.shape[0]
             if now_batch_size < opt.batchsize:
                 continue
+            total_samples += now_batch_size
 
             if use_gpu:
-                inputs = inputs.cuda(); inputs2 = inputs2.cuda(); inputs3 = inputs3.cuda()
-                labels = labels.cuda(); labels2 = labels2.cuda(); labels3 = labels3.cuda()
+                inputs = inputs.cuda()
+                inputs2 = inputs2.cuda()
+                inputs3 = inputs3.cuda()
+                labels = labels.cuda()
+                labels2 = labels2.cuda()
+                labels3 = labels3.cuda()
 
             optimizer.zero_grad()
 
@@ -112,45 +126,86 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
             else:
                 raise ValueError(f"views={opt.views} not supported")
 
+            # Triplet loss（outputs: (logits, feat)）
             f_triplet_loss = torch.tensor(0., device=inputs.device)
             if opt.triplet_loss > 0:
-                features = outputs[1]; features2 = outputs2[1]
+                features = outputs[1]
+                features2 = outputs2[1]
                 split_num = opt.batchsize // opt.sample_num
-                f_triplet_loss = cal_triplet_loss(features, features2, labels, triplet_loss_fn, split_num)
+                f_triplet_loss = cal_triplet_loss(
+                    features, features2, labels, triplet_loss_fn, split_num
+                )
+                outputs, outputs2 = outputs[0], outputs2[0]
+            else:
                 outputs, outputs2 = outputs[0], outputs2[0]
 
-            # ---------- 分类损失 ----------
+            # ---------- 分类损失 + KL ----------
             if opt.views == 2:
-                cls_loss = cal_loss(outputs, labels, criterion) + cal_loss(outputs2, labels3, criterion)
-                kl_loss = cal_kl_loss(outputs, outputs2, loss_kl) if opt.kl_loss else torch.tensor(0., device=inputs.device)
-            else:
-                cls_loss = cal_loss(outputs, labels, criterion) + cal_loss(outputs2, labels2, criterion) + cal_loss(outputs3, labels3, criterion)
+                cls_loss = cal_loss(outputs, labels, criterion) + \
+                           cal_loss(outputs2, labels3, criterion)
+                if opt.kl_loss:
+                    kl_loss = cal_kl_loss(outputs, outputs2, loss_kl)
+                else:
+                    kl_loss = torch.tensor(0., device=inputs.device)
+            else:   # views == 3
+                cls_loss = cal_loss(outputs, labels, criterion) + \
+                           cal_loss(outputs2, labels2, criterion) + \
+                           cal_loss(outputs3, labels3, criterion)
                 kl_loss = torch.tensor(0., device=inputs.device)
 
             loss = kl_loss + cls_loss + opt.triplet_weight * f_triplet_loss
 
-            # ---------- 反传 ----------
+            # ---------- 反向传播 ----------
             with autocast(enabled=opt.autocast):
                 scaler.scale(loss).backward()
                 scaler.step(optimizer)
                 scaler.update()
 
-            # ---------- 统计 ----------
+            # ---------- 累计统计 ----------
             running_loss += loss.item() * now_batch_size
             running_cls_loss += cls_loss.item() * now_batch_size
             running_triplet += f_triplet_loss.item() * now_batch_size
             running_kl_loss += kl_loss.item() * now_batch_size
 
-        # ---------- 每个 Epoch ----------
-        epoch_loss = running_loss / dataset_sizes['satellite']
-        print(f"Epoch {epoch}: loss={epoch_loss:.4f}")
+            # 计算 top‑1 训练准确率（用 outputs 对 labels）
+            with torch.no_grad():
+                _, preds = torch.max(outputs, 1)
+                running_corrects += torch.sum(preds == labels).item()
+
+        # ----------------- 每个 Epoch 的汇总打印 -----------------
+        if total_samples == 0:
+            print("  [Warning] No batch reached batchsize={}, skip epoch stats.".format(opt.batchsize))
+            scheduler.step()
+            continue
+
+        epoch_loss = running_loss / total_samples
+        epoch_cls_loss = running_cls_loss / total_samples
+        epoch_triplet_loss = running_triplet / total_samples
+        epoch_kl = running_kl_loss / total_samples
+        epoch_acc = running_corrects / float(total_samples)
+
+        epoch_time = time.time() - epoch_start
+
+        print("Epoch {} summary:".format(epoch))
+        print("  total_loss   : {:.4f}".format(epoch_loss))
+        print("  cls_loss     : {:.4f}".format(epoch_cls_loss))
+        print("  triplet_loss : {:.4f}".format(epoch_triplet_loss))
+        print("  kl_loss      : {:.4f}".format(epoch_kl))
+        print("  train_acc    : {:.4f}".format(epoch_acc))
+        print("  epoch_time   : {:.0f}m {:.0f}s".format(epoch_time // 60, epoch_time % 60))
+        print('-' * 30)
+
+        # 学习率调度 & 保存
         scheduler.step()
 
         if (epoch + 1) % 10 == 0 or epoch == num_epochs - 1:
             save_network(model, opt.name, epoch)
 
+        # 累计训练时长提示
         time_elapsed = time.time() - since
-        print(f"Training complete in {time_elapsed//60:.0f}m {time_elapsed%60:.0f}s\n")
+        print("Training elapsed: {:.0f}m {:.0f}s\n".format(
+            time_elapsed // 60, time_elapsed % 60
+        ))
 
 
 if __name__ == '__main__':
