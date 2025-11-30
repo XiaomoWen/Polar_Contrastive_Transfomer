@@ -61,7 +61,7 @@ def get_parse():
     # 损失项
     parser.add_argument('--kl_loss', action='store_true', default=False)
     parser.add_argument('--triplet_loss', default=0.3, type=float)
-    parser.add_argument('--triplet_weight', default=1.0, type=float)
+    parser.add_argument('--triplet_weight', default=5.2, type=float)
     parser.add_argument('--sample_num', default=1, type=float)
 
     opt = parser.parse_args()

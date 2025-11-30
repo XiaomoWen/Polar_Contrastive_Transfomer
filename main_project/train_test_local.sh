@@ -15,7 +15,7 @@ pretrain_path="/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_proje
 # ---------------- 训练参数设置 (针对 L40 调优) ----------------
 gpu_ids=0
 num_worker=16          # L40 机器一般 CPU 也不错，可以开多点
-lr=0.0015
+lr=0.0018
 sample_num=1
 block=3
 batchsize=192            # 如果显存有压力可以改为 48 或 32
@@ -25,7 +25,7 @@ pad=0
 views=2
 warmup_epochs=10
 backbone="VIT-S-RoPE-OFFICIAL"
-
+erasing_p=0.12
 use_autocast=true       # 使用 torch.autocast 混合精度（train.py 支持 --autocast）
 
 # ---------------- 日志输出 (修复：使用绝对路径) ----------------
@@ -81,6 +81,7 @@ python train.py \
   --pretrain_path "$pretrain_path" \
   --warmup_epochs "$warmup_epochs" \
   --backbone "$backbone" \
+  --erasing_p "$erasing_p" \
   $( [ "$use_autocast" = true ] && echo "--autocast" ) \
   2>&1 | tee "$train_log"
 
