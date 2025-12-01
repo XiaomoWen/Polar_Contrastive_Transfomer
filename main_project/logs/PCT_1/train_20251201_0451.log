@@ -1,0 +1,1695 @@
+[Resize(size=(224, 224), interpolation=bicubic, max_size=None, antialias=warn), Pad(padding=0, fill=0, padding_mode=edge), RandomCrop(size=(224, 224), padding=None), RandomHorizontalFlip(p=0.5), ToTensor(), Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), <datasets.random_erasing.RandomErasing object at 0x7fce3fa5fe50>]
+Building PCT Model | Views: 2, Block: 3
+=> [Model Strategy] Using PCT (Polar Transform) strictly for Dual-View.
+=========== Building Model: PCT (Polar-Contrastive Transformer) ===========
+=> using Transformer_type: ViT-Small-RoPE-OFFICIAL (timm) as backbone
+=> pretrain: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] loading pretrain from: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] load_state_dict done. missing=0, unexpected=0
+=> Optimizer Strategy: AdamW with Differential Learning Rates.
+   - Backbone LR: 0.000150 (0.1x)
+   - Heads LR:    0.001500 (1.0x)
+=> Scheduler Strategy: Warmup (10 eps) + Cosine Annealing
+   - Total Epochs: 140
+   - Min LR: 1e-6
+---------- Start Training -------------
+Epoch 0/139
+----------
+Epoch 0 summary:
+  total_loss   : 22.6719
+  cls_loss     : 13.1068
+  triplet_loss : 2.1257
+  kl_loss      : 0.0000
+  train_acc    : 0.0000
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 0m 10s
+
+Epoch 1/139
+----------
+Epoch 1 summary:
+  total_loss   : 22.6536
+  cls_loss     : 13.1068
+  triplet_loss : 2.1217
+  kl_loss      : 0.0000
+  train_acc    : 0.0017
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 0m 20s
+
+Epoch 2/139
+----------
+Epoch 2 summary:
+  total_loss   : 22.4948
+  cls_loss     : 13.0286
+  triplet_loss : 2.1035
+  kl_loss      : 0.0000
+  train_acc    : 0.0208
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 0m 30s
+
+Epoch 3/139
+----------
+Epoch 3 summary:
+  total_loss   : 22.3177
+  cls_loss     : 12.9062
+  triplet_loss : 2.0911
+  kl_loss      : 0.0000
+  train_acc    : 0.0660
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 0m 40s
+
+Epoch 4/139
+----------
+Epoch 4 summary:
+  total_loss   : 22.0651
+  cls_loss     : 12.7292
+  triplet_loss : 2.0749
+  kl_loss      : 0.0000
+  train_acc    : 0.1389
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 0m 49s
+
+Epoch 5/139
+----------
+Epoch 5 summary:
+  total_loss   : 21.7578
+  cls_loss     : 12.4583
+  triplet_loss : 2.0671
+  kl_loss      : 0.0000
+  train_acc    : 0.2413
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 0m 59s
+
+Epoch 6/139
+----------
+Epoch 6 summary:
+  total_loss   : 21.3281
+  cls_loss     : 12.0625
+  triplet_loss : 2.0586
+  kl_loss      : 0.0000
+  train_acc    : 0.3264
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 1m 8s
+
+Epoch 7/139
+----------
+Epoch 7 summary:
+  total_loss   : 20.8464
+  cls_loss     : 11.5885
+  triplet_loss : 2.0573
+  kl_loss      : 0.0000
+  train_acc    : 0.3767
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 1m 18s
+
+Epoch 8/139
+----------
+Epoch 8 summary:
+  total_loss   : 20.1797
+  cls_loss     : 10.9844
+  triplet_loss : 2.0430
+  kl_loss      : 0.0000
+  train_acc    : 0.4462
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 1m 28s
+
+Epoch 9/139
+----------
+Epoch 9 summary:
+  total_loss   : 19.4401
+  cls_loss     : 10.2943
+  triplet_loss : 2.0326
+  kl_loss      : 0.0000
+  train_acc    : 0.4983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 1m 39s
+
+Epoch 10/139
+----------
+Epoch 10 summary:
+  total_loss   : 18.6484
+  cls_loss     : 9.5339
+  triplet_loss : 2.0247
+  kl_loss      : 0.0000
+  train_acc    : 0.5833
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 1m 49s
+
+Epoch 11/139
+----------
+Epoch 11 summary:
+  total_loss   : 17.8698
+  cls_loss     : 8.7995
+  triplet_loss : 2.0156
+  kl_loss      : 0.0000
+  train_acc    : 0.6111
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 1m 59s
+
+Epoch 12/139
+----------
+Epoch 12 summary:
+  total_loss   : 17.1641
+  cls_loss     : 8.1328
+  triplet_loss : 2.0072
+  kl_loss      : 0.0000
+  train_acc    : 0.7049
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 2m 9s
+
+Epoch 13/139
+----------
+Epoch 13 summary:
+  total_loss   : 16.3633
+  cls_loss     : 7.3633
+  triplet_loss : 2.0000
+  kl_loss      : 0.0000
+  train_acc    : 0.7448
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 2m 19s
+
+Epoch 14/139
+----------
+Epoch 14 summary:
+  total_loss   : 15.7760
+  cls_loss     : 6.8047
+  triplet_loss : 1.9938
+  kl_loss      : 0.0000
+  train_acc    : 0.7535
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 2m 29s
+
+Epoch 15/139
+----------
+Epoch 15 summary:
+  total_loss   : 15.0260
+  cls_loss     : 6.0781
+  triplet_loss : 1.9886
+  kl_loss      : 0.0000
+  train_acc    : 0.8333
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 2m 39s
+
+Epoch 16/139
+----------
+Epoch 16 summary:
+  total_loss   : 14.4323
+  cls_loss     : 5.5234
+  triplet_loss : 1.9798
+  kl_loss      : 0.0000
+  train_acc    : 0.8472
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 2m 49s
+
+Epoch 17/139
+----------
+Epoch 17 summary:
+  total_loss   : 13.8385
+  cls_loss     : 4.9531
+  triplet_loss : 1.9743
+  kl_loss      : 0.0000
+  train_acc    : 0.8715
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 2m 59s
+
+Epoch 18/139
+----------
+Epoch 18 summary:
+  total_loss   : 13.1862
+  cls_loss     : 4.3372
+  triplet_loss : 1.9661
+  kl_loss      : 0.0000
+  train_acc    : 0.8785
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 3m 10s
+
+Epoch 19/139
+----------
+Epoch 19 summary:
+  total_loss   : 12.6868
+  cls_loss     : 3.8509
+  triplet_loss : 1.9639
+  kl_loss      : 0.0000
+  train_acc    : 0.9028
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 3m 20s
+
+Epoch 20/139
+----------
+Epoch 20 summary:
+  total_loss   : 12.2122
+  cls_loss     : 3.3919
+  triplet_loss : 1.9600
+  kl_loss      : 0.0000
+  train_acc    : 0.9479
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 3m 30s
+
+Epoch 21/139
+----------
+Epoch 21 summary:
+  total_loss   : 11.8171
+  cls_loss     : 3.0124
+  triplet_loss : 1.9567
+  kl_loss      : 0.0000
+  train_acc    : 0.9462
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 3m 40s
+
+Epoch 22/139
+----------
+Epoch 22 summary:
+  total_loss   : 11.4733
+  cls_loss     : 2.6816
+  triplet_loss : 1.9541
+  kl_loss      : 0.0000
+  train_acc    : 0.9705
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 3m 49s
+
+Epoch 23/139
+----------
+Epoch 23 summary:
+  total_loss   : 11.0137
+  cls_loss     : 2.2611
+  triplet_loss : 1.9453
+  kl_loss      : 0.0000
+  train_acc    : 0.9757
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 3m 59s
+
+Epoch 24/139
+----------
+Epoch 24 summary:
+  total_loss   : 10.7904
+  cls_loss     : 2.0378
+  triplet_loss : 1.9453
+  kl_loss      : 0.0000
+  train_acc    : 0.9722
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 4m 9s
+
+Epoch 25/139
+----------
+Epoch 25 summary:
+  total_loss   : 10.5687
+  cls_loss     : 1.8291
+  triplet_loss : 1.9424
+  kl_loss      : 0.0000
+  train_acc    : 0.9722
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 4m 19s
+
+Epoch 26/139
+----------
+Epoch 26 summary:
+  total_loss   : 10.3073
+  cls_loss     : 1.5729
+  triplet_loss : 1.9411
+  kl_loss      : 0.0000
+  train_acc    : 0.9844
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 4m 29s
+
+Epoch 27/139
+----------
+Epoch 27 summary:
+  total_loss   : 10.1419
+  cls_loss     : 1.4284
+  triplet_loss : 1.9359
+  kl_loss      : 0.0000
+  train_acc    : 0.9826
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 4m 39s
+
+Epoch 28/139
+----------
+Epoch 28 summary:
+  total_loss   : 9.9268
+  cls_loss     : 1.2340
+  triplet_loss : 1.9313
+  kl_loss      : 0.0000
+  train_acc    : 0.9861
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 4m 49s
+
+Epoch 29/139
+----------
+Epoch 29 summary:
+  total_loss   : 9.8255
+  cls_loss     : 1.1380
+  triplet_loss : 1.9303
+  kl_loss      : 0.0000
+  train_acc    : 0.9878
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 4m 58s
+
+Epoch 30/139
+----------
+Epoch 30 summary:
+  total_loss   : 9.6922
+  cls_loss     : 1.0125
+  triplet_loss : 1.9287
+  kl_loss      : 0.0000
+  train_acc    : 0.9861
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 5m 8s
+
+Epoch 31/139
+----------
+Epoch 31 summary:
+  total_loss   : 9.5957
+  cls_loss     : 0.9447
+  triplet_loss : 1.9222
+  kl_loss      : 0.0000
+  train_acc    : 0.9861
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 5m 18s
+
+Epoch 32/139
+----------
+Epoch 32 summary:
+  total_loss   : 9.5570
+  cls_loss     : 0.8773
+  triplet_loss : 1.9284
+  kl_loss      : 0.0000
+  train_acc    : 0.9878
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 5m 28s
+
+Epoch 33/139
+----------
+Epoch 33 summary:
+  total_loss   : 9.4917
+  cls_loss     : 0.8328
+  triplet_loss : 1.9242
+  kl_loss      : 0.0000
+  train_acc    : 0.9844
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 5m 38s
+
+Epoch 34/139
+----------
+Epoch 34 summary:
+  total_loss   : 9.3193
+  cls_loss     : 0.6917
+  triplet_loss : 1.9173
+  kl_loss      : 0.0000
+  train_acc    : 0.9896
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 5m 48s
+
+Epoch 35/139
+----------
+Epoch 35 summary:
+  total_loss   : 9.3255
+  cls_loss     : 0.6849
+  triplet_loss : 1.9202
+  kl_loss      : 0.0000
+  train_acc    : 0.9931
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 5m 58s
+
+Epoch 36/139
+----------
+Epoch 36 summary:
+  total_loss   : 9.2394
+  cls_loss     : 0.6300
+  triplet_loss : 1.9134
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 6m 8s
+
+Epoch 37/139
+----------
+Epoch 37 summary:
+  total_loss   : 9.2314
+  cls_loss     : 0.6195
+  triplet_loss : 1.9141
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 6m 19s
+
+Epoch 38/139
+----------
+Epoch 38 summary:
+  total_loss   : 9.2025
+  cls_loss     : 0.5749
+  triplet_loss : 1.9176
+  kl_loss      : 0.0000
+  train_acc    : 0.9913
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 6m 29s
+
+Epoch 39/139
+----------
+Epoch 39 summary:
+  total_loss   : 9.1781
+  cls_loss     : 0.5661
+  triplet_loss : 1.9137
+  kl_loss      : 0.0000
+  train_acc    : 0.9896
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 6m 39s
+
+Epoch 40/139
+----------
+Epoch 40 summary:
+  total_loss   : 9.0841
+  cls_loss     : 0.4955
+  triplet_loss : 1.9089
+  kl_loss      : 0.0000
+  train_acc    : 0.9913
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 6m 49s
+
+Epoch 41/139
+----------
+Epoch 41 summary:
+  total_loss   : 9.0673
+  cls_loss     : 0.4814
+  triplet_loss : 1.9085
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 6m 59s
+
+Epoch 42/139
+----------
+Epoch 42 summary:
+  total_loss   : 9.0836
+  cls_loss     : 0.4820
+  triplet_loss : 1.9108
+  kl_loss      : 0.0000
+  train_acc    : 0.9931
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 7m 9s
+
+Epoch 43/139
+----------
+Epoch 43 summary:
+  total_loss   : 9.0360
+  cls_loss     : 0.4474
+  triplet_loss : 1.9085
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 7m 19s
+
+Epoch 44/139
+----------
+Epoch 44 summary:
+  total_loss   : 9.0464
+  cls_loss     : 0.4578
+  triplet_loss : 1.9092
+  kl_loss      : 0.0000
+  train_acc    : 0.9913
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 7m 30s
+
+Epoch 45/139
+----------
+Epoch 45 summary:
+  total_loss   : 8.9482
+  cls_loss     : 0.3778
+  triplet_loss : 1.9043
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 7m 40s
+
+Epoch 46/139
+----------
+Epoch 46 summary:
+  total_loss   : 8.9366
+  cls_loss     : 0.3741
+  triplet_loss : 1.9027
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 7m 51s
+
+Epoch 47/139
+----------
+Epoch 47 summary:
+  total_loss   : 8.9518
+  cls_loss     : 0.3841
+  triplet_loss : 1.9046
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 8m 1s
+
+Epoch 48/139
+----------
+Epoch 48 summary:
+  total_loss   : 8.9390
+  cls_loss     : 0.3765
+  triplet_loss : 1.9027
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 8m 11s
+
+Epoch 49/139
+----------
+Epoch 49 summary:
+  total_loss   : 8.8901
+  cls_loss     : 0.3406
+  triplet_loss : 1.8997
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 8m 21s
+
+Epoch 50/139
+----------
+Epoch 50 summary:
+  total_loss   : 8.9434
+  cls_loss     : 0.3730
+  triplet_loss : 1.9046
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 8m 31s
+
+Epoch 51/139
+----------
+Epoch 51 summary:
+  total_loss   : 8.8672
+  cls_loss     : 0.3281
+  triplet_loss : 1.8978
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 8m 40s
+
+Epoch 52/139
+----------
+Epoch 52 summary:
+  total_loss   : 8.9009
+  cls_loss     : 0.3462
+  triplet_loss : 1.9010
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 8m 51s
+
+Epoch 53/139
+----------
+Epoch 53 summary:
+  total_loss   : 8.8841
+  cls_loss     : 0.3398
+  triplet_loss : 1.8991
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 9m 1s
+
+Epoch 54/139
+----------
+Epoch 54 summary:
+  total_loss   : 8.8710
+  cls_loss     : 0.3189
+  triplet_loss : 1.9007
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 9m 11s
+
+Epoch 55/139
+----------
+Epoch 55 summary:
+  total_loss   : 8.8284
+  cls_loss     : 0.2997
+  triplet_loss : 1.8952
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 9m 21s
+
+Epoch 56/139
+----------
+Epoch 56 summary:
+  total_loss   : 8.8363
+  cls_loss     : 0.2946
+  triplet_loss : 1.8981
+  kl_loss      : 0.0000
+  train_acc    : 0.9931
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 9m 31s
+
+Epoch 57/139
+----------
+Epoch 57 summary:
+  total_loss   : 8.7912
+  cls_loss     : 0.2625
+  triplet_loss : 1.8958
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 9m 41s
+
+Epoch 58/139
+----------
+Epoch 58 summary:
+  total_loss   : 8.7979
+  cls_loss     : 0.2796
+  triplet_loss : 1.8926
+  kl_loss      : 0.0000
+  train_acc    : 1.0000
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 9m 51s
+
+Epoch 59/139
+----------
+Epoch 59 summary:
+  total_loss   : 8.7958
+  cls_loss     : 0.2776
+  triplet_loss : 1.8929
+  kl_loss      : 0.0000
+  train_acc    : 1.0000
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 10m 1s
+
+Epoch 60/139
+----------
+Epoch 60 summary:
+  total_loss   : 8.7817
+  cls_loss     : 0.2712
+  triplet_loss : 1.8913
+  kl_loss      : 0.0000
+  train_acc    : 0.9931
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 10m 12s
+
+Epoch 61/139
+----------
+Epoch 61 summary:
+  total_loss   : 8.8087
+  cls_loss     : 0.2983
+  triplet_loss : 1.8910
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 10m 23s
+
+Epoch 62/139
+----------
+Epoch 62 summary:
+  total_loss   : 8.7750
+  cls_loss     : 0.2594
+  triplet_loss : 1.8929
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 10m 33s
+
+Epoch 63/139
+----------
+Epoch 63 summary:
+  total_loss   : 8.7882
+  cls_loss     : 0.2674
+  triplet_loss : 1.8939
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 10m 42s
+
+Epoch 64/139
+----------
+Epoch 64 summary:
+  total_loss   : 8.7643
+  cls_loss     : 0.2591
+  triplet_loss : 1.8900
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 10m 51s
+
+Epoch 65/139
+----------
+Epoch 65 summary:
+  total_loss   : 8.7387
+  cls_loss     : 0.2257
+  triplet_loss : 1.8916
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 8s
+------------------------------
+Training elapsed: 10m 60s
+
+Epoch 66/139
+----------
+Epoch 66 summary:
+  total_loss   : 8.7389
+  cls_loss     : 0.2389
+  triplet_loss : 1.8887
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 11m 9s
+
+Epoch 67/139
+----------
+Epoch 67 summary:
+  total_loss   : 8.7185
+  cls_loss     : 0.2315
+  triplet_loss : 1.8861
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 11m 20s
+
+Epoch 68/139
+----------
+Epoch 68 summary:
+  total_loss   : 8.7347
+  cls_loss     : 0.2425
+  triplet_loss : 1.8870
+  kl_loss      : 0.0000
+  train_acc    : 0.9931
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 11m 29s
+
+Epoch 69/139
+----------
+Epoch 69 summary:
+  total_loss   : 8.7366
+  cls_loss     : 0.2392
+  triplet_loss : 1.8883
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 11m 39s
+
+Epoch 70/139
+----------
+Epoch 70 summary:
+  total_loss   : 8.6746
+  cls_loss     : 0.1954
+  triplet_loss : 1.8841
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 11m 49s
+
+Epoch 71/139
+----------
+Epoch 71 summary:
+  total_loss   : 8.7015
+  cls_loss     : 0.2093
+  triplet_loss : 1.8870
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 11m 59s
+
+Epoch 72/139
+----------
+Epoch 72 summary:
+  total_loss   : 8.6924
+  cls_loss     : 0.2132
+  triplet_loss : 1.8844
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 12m 9s
+
+Epoch 73/139
+----------
+Epoch 73 summary:
+  total_loss   : 8.6997
+  cls_loss     : 0.2284
+  triplet_loss : 1.8822
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 12m 20s
+
+Epoch 74/139
+----------
+Epoch 74 summary:
+  total_loss   : 8.6754
+  cls_loss     : 0.1962
+  triplet_loss : 1.8841
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 12s
+------------------------------
+Training elapsed: 12m 31s
+
+Epoch 75/139
+----------
+Epoch 75 summary:
+  total_loss   : 8.6965
+  cls_loss     : 0.2304
+  triplet_loss : 1.8815
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 12m 42s
+
+Epoch 76/139
+----------
+Epoch 76 summary:
+  total_loss   : 8.7312
+  cls_loss     : 0.2521
+  triplet_loss : 1.8848
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 12m 53s
+
+Epoch 77/139
+----------
+Epoch 77 summary:
+  total_loss   : 8.6879
+  cls_loss     : 0.2061
+  triplet_loss : 1.8851
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 13m 3s
+
+Epoch 78/139
+----------
+Epoch 78 summary:
+  total_loss   : 8.6443
+  cls_loss     : 0.1860
+  triplet_loss : 1.8799
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 13m 12s
+
+Epoch 79/139
+----------
+Epoch 79 summary:
+  total_loss   : 8.7068
+  cls_loss     : 0.2329
+  triplet_loss : 1.8835
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 13m 22s
+
+Epoch 80/139
+----------
+Epoch 80 summary:
+  total_loss   : 8.6742
+  cls_loss     : 0.2106
+  triplet_loss : 1.8809
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 13m 32s
+
+Epoch 81/139
+----------
+Epoch 81 summary:
+  total_loss   : 8.7255
+  cls_loss     : 0.2463
+  triplet_loss : 1.8844
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 13m 43s
+
+Epoch 82/139
+----------
+Epoch 82 summary:
+  total_loss   : 8.6455
+  cls_loss     : 0.1872
+  triplet_loss : 1.8802
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 13m 53s
+
+Epoch 83/139
+----------
+Epoch 83 summary:
+  total_loss   : 8.6228
+  cls_loss     : 0.1775
+  triplet_loss : 1.8766
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 14m 3s
+
+Epoch 84/139
+----------
+Epoch 84 summary:
+  total_loss   : 8.7028
+  cls_loss     : 0.2210
+  triplet_loss : 1.8844
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 14m 13s
+
+Epoch 85/139
+----------
+Epoch 85 summary:
+  total_loss   : 8.6695
+  cls_loss     : 0.2033
+  triplet_loss : 1.8812
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 14m 23s
+
+Epoch 86/139
+----------
+Epoch 86 summary:
+  total_loss   : 8.6263
+  cls_loss     : 0.1783
+  triplet_loss : 1.8776
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 14m 34s
+
+Epoch 87/139
+----------
+Epoch 87 summary:
+  total_loss   : 8.6521
+  cls_loss     : 0.1912
+  triplet_loss : 1.8799
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 14m 44s
+
+Epoch 88/139
+----------
+Epoch 88 summary:
+  total_loss   : 8.6095
+  cls_loss     : 0.1667
+  triplet_loss : 1.8757
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 14m 54s
+
+Epoch 89/139
+----------
+Epoch 89 summary:
+  total_loss   : 8.6597
+  cls_loss     : 0.1988
+  triplet_loss : 1.8802
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 15m 5s
+
+Epoch 90/139
+----------
+Epoch 90 summary:
+  total_loss   : 8.6132
+  cls_loss     : 0.1705
+  triplet_loss : 1.8760
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 15m 15s
+
+Epoch 91/139
+----------
+Epoch 91 summary:
+  total_loss   : 8.6312
+  cls_loss     : 0.1807
+  triplet_loss : 1.8779
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 15m 25s
+
+Epoch 92/139
+----------
+Epoch 92 summary:
+  total_loss   : 8.6233
+  cls_loss     : 0.1806
+  triplet_loss : 1.8760
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 15m 35s
+
+Epoch 93/139
+----------
+Epoch 93 summary:
+  total_loss   : 8.6072
+  cls_loss     : 0.1723
+  triplet_loss : 1.8740
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 15m 45s
+
+Epoch 94/139
+----------
+Epoch 94 summary:
+  total_loss   : 8.6264
+  cls_loss     : 0.1811
+  triplet_loss : 1.8770
+  kl_loss      : 0.0000
+  train_acc    : 0.9931
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 15m 55s
+
+Epoch 95/139
+----------
+Epoch 95 summary:
+  total_loss   : 8.5942
+  cls_loss     : 0.1567
+  triplet_loss : 1.8747
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 16m 5s
+
+Epoch 96/139
+----------
+Epoch 96 summary:
+  total_loss   : 8.6028
+  cls_loss     : 0.1705
+  triplet_loss : 1.8740
+  kl_loss      : 0.0000
+  train_acc    : 1.0000
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 16m 16s
+
+Epoch 97/139
+----------
+Epoch 97 summary:
+  total_loss   : 8.5820
+  cls_loss     : 0.1628
+  triplet_loss : 1.8711
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 16m 26s
+
+Epoch 98/139
+----------
+Epoch 98 summary:
+  total_loss   : 8.6022
+  cls_loss     : 0.1699
+  triplet_loss : 1.8743
+  kl_loss      : 0.0000
+  train_acc    : 0.9931
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 16m 36s
+
+Epoch 99/139
+----------
+Epoch 99 summary:
+  total_loss   : 8.5996
+  cls_loss     : 0.1673
+  triplet_loss : 1.8734
+  kl_loss      : 0.0000
+  train_acc    : 0.9931
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 16m 45s
+
+Epoch 100/139
+----------
+Epoch 100 summary:
+  total_loss   : 8.5745
+  cls_loss     : 0.1423
+  triplet_loss : 1.8740
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 16m 54s
+
+Epoch 101/139
+----------
+Epoch 101 summary:
+  total_loss   : 8.5666
+  cls_loss     : 0.1447
+  triplet_loss : 1.8711
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 17m 5s
+
+Epoch 102/139
+----------
+Epoch 102 summary:
+  total_loss   : 8.5821
+  cls_loss     : 0.1576
+  triplet_loss : 1.8721
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 17m 15s
+
+Epoch 103/139
+----------
+Epoch 103 summary:
+  total_loss   : 8.5973
+  cls_loss     : 0.1650
+  triplet_loss : 1.8734
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 17m 26s
+
+Epoch 104/139
+----------
+Epoch 104 summary:
+  total_loss   : 8.5830
+  cls_loss     : 0.1507
+  triplet_loss : 1.8737
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 17m 36s
+
+Epoch 105/139
+----------
+Epoch 105 summary:
+  total_loss   : 8.5934
+  cls_loss     : 0.1637
+  triplet_loss : 1.8730
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 17m 46s
+
+Epoch 106/139
+----------
+Epoch 106 summary:
+  total_loss   : 8.5949
+  cls_loss     : 0.1496
+  triplet_loss : 1.8770
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 17m 56s
+
+Epoch 107/139
+----------
+Epoch 107 summary:
+  total_loss   : 8.5661
+  cls_loss     : 0.1468
+  triplet_loss : 1.8711
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 18m 6s
+
+Epoch 108/139
+----------
+Epoch 108 summary:
+  total_loss   : 8.5720
+  cls_loss     : 0.1605
+  triplet_loss : 1.8691
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 18m 17s
+
+Epoch 109/139
+----------
+Epoch 109 summary:
+  total_loss   : 8.5992
+  cls_loss     : 0.1643
+  triplet_loss : 1.8743
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 18m 27s
+
+Epoch 110/139
+----------
+Epoch 110 summary:
+  total_loss   : 8.5662
+  cls_loss     : 0.1392
+  triplet_loss : 1.8727
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 18m 37s
+
+Epoch 111/139
+----------
+Epoch 111 summary:
+  total_loss   : 8.5774
+  cls_loss     : 0.1555
+  triplet_loss : 1.8711
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 18m 47s
+
+Epoch 112/139
+----------
+Epoch 112 summary:
+  total_loss   : 8.5750
+  cls_loss     : 0.1557
+  triplet_loss : 1.8711
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 18m 57s
+
+Epoch 113/139
+----------
+Epoch 113 summary:
+  total_loss   : 8.5710
+  cls_loss     : 0.1466
+  triplet_loss : 1.8714
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 19m 7s
+
+Epoch 114/139
+----------
+Epoch 114 summary:
+  total_loss   : 8.5479
+  cls_loss     : 0.1365
+  triplet_loss : 1.8695
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 19m 17s
+
+Epoch 115/139
+----------
+Epoch 115 summary:
+  total_loss   : 8.5809
+  cls_loss     : 0.1616
+  triplet_loss : 1.8714
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 19m 26s
+
+Epoch 116/139
+----------
+Epoch 116 summary:
+  total_loss   : 8.6292
+  cls_loss     : 0.1839
+  triplet_loss : 1.8766
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 19m 36s
+
+Epoch 117/139
+----------
+Epoch 117 summary:
+  total_loss   : 8.5537
+  cls_loss     : 0.1422
+  triplet_loss : 1.8691
+  kl_loss      : 0.0000
+  train_acc    : 1.0000
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 19m 47s
+
+Epoch 118/139
+----------
+Epoch 118 summary:
+  total_loss   : 8.5316
+  cls_loss     : 0.1201
+  triplet_loss : 1.8695
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 19m 56s
+
+Epoch 119/139
+----------
+Epoch 119 summary:
+  total_loss   : 8.5401
+  cls_loss     : 0.1313
+  triplet_loss : 1.8685
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 20m 7s
+
+Epoch 120/139
+----------
+Epoch 120 summary:
+  total_loss   : 8.5731
+  cls_loss     : 0.1564
+  triplet_loss : 1.8698
+  kl_loss      : 0.0000
+  train_acc    : 1.0000
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 20m 17s
+
+Epoch 121/139
+----------
+Epoch 121 summary:
+  total_loss   : 8.5644
+  cls_loss     : 0.1451
+  triplet_loss : 1.8704
+  kl_loss      : 0.0000
+  train_acc    : 1.0000
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 20m 27s
+
+Epoch 122/139
+----------
+Epoch 122 summary:
+  total_loss   : 8.5594
+  cls_loss     : 0.1323
+  triplet_loss : 1.8724
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 20m 37s
+
+Epoch 123/139
+----------
+Epoch 123 summary:
+  total_loss   : 8.5741
+  cls_loss     : 0.1678
+  triplet_loss : 1.8675
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 20m 48s
+
+Epoch 124/139
+----------
+Epoch 124 summary:
+  total_loss   : 8.5650
+  cls_loss     : 0.1536
+  triplet_loss : 1.8691
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 20m 58s
+
+Epoch 125/139
+----------
+Epoch 125 summary:
+  total_loss   : 8.5853
+  cls_loss     : 0.1556
+  triplet_loss : 1.8734
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 21m 7s
+
+Epoch 126/139
+----------
+Epoch 126 summary:
+  total_loss   : 8.5463
+  cls_loss     : 0.1374
+  triplet_loss : 1.8688
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 21m 16s
+
+Epoch 127/139
+----------
+Epoch 127 summary:
+  total_loss   : 8.6011
+  cls_loss     : 0.1714
+  triplet_loss : 1.8730
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 21m 24s
+
+Epoch 128/139
+----------
+Epoch 128 summary:
+  total_loss   : 8.5181
+  cls_loss     : 0.1249
+  triplet_loss : 1.8652
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 8s
+------------------------------
+Training elapsed: 21m 32s
+
+Epoch 129/139
+----------
+Epoch 129 summary:
+  total_loss   : 8.5357
+  cls_loss     : 0.1268
+  triplet_loss : 1.8685
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 8s
+------------------------------
+Training elapsed: 21m 41s
+
+Epoch 130/139
+----------
+Epoch 130 summary:
+  total_loss   : 8.5897
+  cls_loss     : 0.1548
+  triplet_loss : 1.8740
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 8s
+------------------------------
+Training elapsed: 21m 49s
+
+Epoch 131/139
+----------
+Epoch 131 summary:
+  total_loss   : 8.5658
+  cls_loss     : 0.1596
+  triplet_loss : 1.8678
+  kl_loss      : 0.0000
+  train_acc    : 1.0000
+  epoch_time   : 0m 8s
+------------------------------
+Training elapsed: 21m 57s
+
+Epoch 132/139
+----------
+Epoch 132 summary:
+  total_loss   : 8.5833
+  cls_loss     : 0.1667
+  triplet_loss : 1.8704
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 22m 6s
+
+Epoch 133/139
+----------
+Epoch 133 summary:
+  total_loss   : 8.5334
+  cls_loss     : 0.1402
+  triplet_loss : 1.8649
+  kl_loss      : 0.0000
+  train_acc    : 0.9948
+  epoch_time   : 0m 8s
+------------------------------
+Training elapsed: 22m 14s
+
+Epoch 134/139
+----------
+Epoch 134 summary:
+  total_loss   : 8.5824
+  cls_loss     : 0.1657
+  triplet_loss : 1.8701
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 22m 23s
+
+Epoch 135/139
+----------
+Epoch 135 summary:
+  total_loss   : 8.5321
+  cls_loss     : 0.1311
+  triplet_loss : 1.8669
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 22m 33s
+
+Epoch 136/139
+----------
+Epoch 136 summary:
+  total_loss   : 8.5811
+  cls_loss     : 0.1592
+  triplet_loss : 1.8714
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 22m 43s
+
+Epoch 137/139
+----------
+Epoch 137 summary:
+  total_loss   : 8.5803
+  cls_loss     : 0.1480
+  triplet_loss : 1.8740
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 11s
+------------------------------
+Training elapsed: 22m 54s
+
+Epoch 138/139
+----------
+Epoch 138 summary:
+  total_loss   : 8.5313
+  cls_loss     : 0.1355
+  triplet_loss : 1.8659
+  kl_loss      : 0.0000
+  train_acc    : 0.9965
+  epoch_time   : 0m 9s
+------------------------------
+Training elapsed: 23m 3s
+
+Epoch 139/139
+----------
+Epoch 139 summary:
+  total_loss   : 8.5625
+  cls_loss     : 0.1433
+  triplet_loss : 1.8708
+  kl_loss      : 0.0000
+  train_acc    : 0.9983
+  epoch_time   : 0m 10s
+------------------------------
+Training elapsed: 23m 13s
+

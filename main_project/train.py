@@ -46,22 +46,27 @@ def get_parse():
     parser.add_argument('--share', action='store_true', default=True)
     parser.add_argument('--block', default=3, type=int)
 
+    # [新增/修改] 关键正则化参数接口 (为了鲁棒性)
+    # 注意：默认值给得比较保守，实际训练通过shell脚本传入 aggressive 的值
+    parser.add_argument('--drop_path_rate', default=0.1, type=float, help='Drop Path Rate for ViT')
+
     # 优化参数
     parser.add_argument('--num_epochs', default=120, type=int)
     parser.add_argument('--steps', default=[70, 110], type=int)
-    parser.add_argument('--lr', default=0.0003, type=float)
+    parser.add_argument('--lr', default=0.01, type=float)
     parser.add_argument('--warm_epoch', default=0, type=int)
     parser.add_argument('--warmup_epochs', default=10, type=int)
     parser.add_argument('--moving_avg', default=1.0, type=float)
-
+    
     # AMP
+    # 默认设为 False
     parser.add_argument('--fp16', action='store_true', default=False)
-    parser.add_argument('--autocast', action='store_true', default=True)
+    parser.add_argument('--autocast', action='store_true', default=False)
 
     # 损失项
     parser.add_argument('--kl_loss', action='store_true', default=False)
     parser.add_argument('--triplet_loss', default=0.3, type=float)
-    parser.add_argument('--triplet_weight', default=5.2, type=float)
+    parser.add_argument('--triplet_weight', default=4.5, type=float)
     parser.add_argument('--sample_num', default=1, type=float)
 
     opt = parser.parse_args()
@@ -77,6 +82,11 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
     criterion = nn.CrossEntropyLoss()
     loss_kl = nn.KLDivLoss(reduction='batchmean')
     triplet_loss_fn = Tripletloss(margin=opt.triplet_loss)
+
+    print(f"Training Strategy Confirmed:")
+    print(f"  >>> DropPath Rate: {opt.drop_path_rate} (High for Robustness)")
+    print(f"  >>> Weight Decay : {opt.weight_decay} (High for Regularization)")
+    print(f"  >>> Autocast     : {opt.autocast}")
 
     for epoch in range(num_epochs):
         epoch_start = time.time()

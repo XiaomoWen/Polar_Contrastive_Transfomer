@@ -1,0 +1,65 @@
+[Resize(size=(384, 384), interpolation=bicubic, max_size=None, antialias=warn), Pad(padding=0, fill=0, padding_mode=edge), RandomCrop(size=(384, 384), padding=None), RandomHorizontalFlip(p=0.5), ToTensor(), Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), <datasets.random_erasing.RandomErasing object at 0x7f7651f1ce20>]
+Building PCT Model | Views: 2, Block: 3
+=> [Model Strategy] Using PCT (Polar Transform) strictly for Dual-View.
+=========== Building Model: PCT (Polar-Contrastive Transformer) ===========
+=> using Transformer_type: ViT-Small-RoPE-OFFICIAL (timm) as backbone
+=> pretrain: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] loading pretrain from: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] load_state_dict done. missing=0, unexpected=0
+=> Optimizer Strategy: AdamW with Differential Learning Rates.
+   - Backbone LR: 0.000150 (0.1x)
+   - Heads LR:    0.001500 (1.0x)
+=> Scheduler Strategy: Warmup (10 eps) + Cosine Annealing
+   - Total Epochs: 160
+   - Min LR: 1e-6
+---------- Start Training -------------
+Training Strategy Confirmed:
+  >>> DropPath Rate: 0.28 (High for Robustness)
+  >>> Weight Decay : 0.05 (High for Regularization)
+  >>> Autocast     : False
+Epoch 0/159
+----------
+Traceback (most recent call last):
+  File "train.py", line 266, in <module>
+    train_model(model, opt, optimizer_ft, exp_lr_scheduler, dataloaders, dataset_sizes)
+  File "train.py", line 134, in train_model
+    outputs, outputs2 = model(inputs, inputs3)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/models/model.py", line 90, in forward
+    feat_drone = self.aerial_encoder(img_drone)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/models/PCT/make_model.py", line 217, in forward
+    features = self.transformer(x)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/models/PCT/backbones/vit_rope.py", line 51, in forward
+    feats = self.backbone.forward_features(x)  # [B, C]
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/timm/models/eva.py", line 993, in forward_features
+    x = blk(x, rope=rot_pos_embed)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/timm/models/eva.py", line 363, in forward
+    x = x + self.drop_path2(self.gamma_2 * self.mlp(self.norm2(x)))
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/timm/layers/mlp.py", line 49, in forward
+    x = self.act(x)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/home/ps/miniconda3/envs/PCT/lib/python3.8/site-packages/torch/nn/modules/activation.py", line 682, in forward
+    return F.gelu(input, approximate=self.approximate)
+torch.cuda.OutOfMemoryError: CUDA out of memory. Tried to allocate 650.00 MiB. GPU 0 has a total capacty of 44.42 GiB of which 220.25 MiB is free. Process 1914459 has 1.37 GiB memory in use. Including non-PyTorch memory, this process has 42.79 GiB memory in use. Of the allocated memory 42.02 GiB is allocated by PyTorch, and 279.82 MiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting max_split_size_mb to avoid fragmentation.  See documentation for Memory Management and PYTORCH_CUDA_ALLOC_CONF

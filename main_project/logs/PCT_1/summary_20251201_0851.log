@@ -1,0 +1,9 @@
+===== Environment Info =====
+Date: 2025年 12月 01日 星期一 08:51:36 CST
+Host: ps
+GPU: NVIDIA L40, 46068 MiB, 565.57.01
+CUDA: (nvcc not found, likely CUDA runtime only)
+PyTorch: 2.1.2+cu121
+Python: Python 3.8.20
+-----------------------------
+======= [1/2] TRAINING START =======

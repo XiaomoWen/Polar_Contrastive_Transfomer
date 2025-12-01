@@ -19,7 +19,8 @@ class OfficialRoPEViTSmall(nn.Module):
         self.backbone = timm.create_model(
             'vit_small_patch16_rope_224.naver_in1k',
             pretrained=False,    # 不从网络下载，手动 load
-            num_classes=1000     # 与 ImageNet 预训练对齐
+            num_classes=1000,     # 与 ImageNet 预训练对齐
+            img_size=384         # 修改输入尺寸为 384x384
         )
 
         # 2. 加载本地预训练权重
