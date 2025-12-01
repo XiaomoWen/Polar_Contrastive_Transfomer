@@ -19,3 +19,7 @@ Config: DropPath=0.25, Erase=0.25
 ✅ Training completed in 39 minutes.
 
 ======= [2/2] TESTING START =======
+✅ All tests finished. Time cost: 20 minutes.
+
+Logs saved to: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/logs/PCT_Robust_V2
+===== Job Finished at 2025年 12月 01日 星期一 19:14:07 CST =====
