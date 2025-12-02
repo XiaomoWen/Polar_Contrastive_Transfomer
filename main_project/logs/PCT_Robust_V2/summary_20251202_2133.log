@@ -1,0 +1,16 @@
+===== Environment Info =====
+Date: 2025年 12月 02日 星期二 21:33:52 CST
+Host: ps
+GPU: NVIDIA L40, 46068 MiB, 565.57.01
+CUDA: (nvcc not found)
+PyTorch: 2.1.2+cu121
+Config: DropPath=0.23, Erase=0.23
+-----------------------------
+======= [1/2] TRAINING START =======
+✅ Training completed in 38 minutes.
+
+======= [2/2] TESTING START (Best Loss Model) =======
+✅ Best Loss Model test finished. Time cost: 9 minutes.
+
+Logs saved to: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/logs/PCT_Robust_V2
+===== Job Finished at 2025年 12月 02日 星期二 22:21:55 CST =====

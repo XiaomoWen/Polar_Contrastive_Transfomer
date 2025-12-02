@@ -13,7 +13,7 @@ test_dir="/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/da
 pretrain_path="/home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth"
 
 # ---------------- 训练参数设置 (针对 L40 调优) ----------------
-gpu_ids=1
+gpu_ids=7
 num_worker=16          
 lr=0.08
 sample_num=1
@@ -29,8 +29,8 @@ h=384
 w=384
 
 # === 核心鲁棒性增强参数 ===
-erasing_p=0.25          # 强遮挡增强
-drop_path_rate=0.25      # DropPath 随机深度增强         
+erasing_p=0.25         # 强遮挡增强
+drop_path_rate=0.25   # DropPath 随机深度增强         
 use_autocast=false      
 # ========================
 
@@ -103,10 +103,10 @@ if [ ! -d "checkpoints/$name" ]; then
 fi
 
 # ==============================================================
-#                       TEST
+#                       TEST (Modified)
 # ==============================================================
 
-echo "======= [2/2] TESTING START =======" | tee -a "$summary_log"
+echo "======= [2/2] TESTING START (Best Loss Model) =======" | tee -a "$summary_log"
 test_start=$(date +%s)
 
 cd "checkpoints/$name" || { echo "❌ 路径 checkpoints/$name 不存在"; exit 1; }
@@ -114,27 +114,28 @@ cd "checkpoints/$name" || { echo "❌ 路径 checkpoints/$name 不存在"; exit 
 # 确保 pretrain_model 可访问
 [ ! -d "pretrain_model" ] && ln -s ../../pretrain_model pretrain_model
 
-# 测试策略：每 10 epoch 测一次，观察收敛稳定性
-for ((i=109; i<=num_epochs; i+=10)); do
-  echo "======= Testing checkpoint: net_${i}.pth =======" | tee -a "$test_log"
-  if [ ! -f "net_${i}.pth" ]; then
-    echo "⚠️  net_${i}.pth 不存在，跳过。" | tee -a "$test_log"
-    continue
-  fi
+# [修改] 仅测试 net_best_loss.pth
+echo "======= Testing Best Loss Checkpoint: net_best_loss.pth =======" | tee -a "$test_log"
+
+if [ ! -f "net_best_loss.pth" ]; then
+  echo "⚠️  net_best_loss.pth 不存在，可能训练未完成或未触发保存条件。" | tee -a "$test_log"
+else
+  # 测试 mode 1 和 2 (根据你原本的脚本)
   for ((j=1; j<3; j++)); do
+    echo "  >> Testing Mode $j ..."
     python ../../test_server.py \
       --test_dir "$test_dir" \
-      --checkpoint "net_${i}.pth" \
+      --checkpoint "net_best_loss.pth" \
       --mode "$j" \
       --gpu_ids "$gpu_ids" \
       --num_worker "$num_worker" \
       --pad "$pad" 2>&1 | tee -a "$test_log"
   done
-done
+fi
 
 test_end=$(date +%s)
 test_dur=$((test_end - test_start))
-printf "✅ All tests finished. Time cost: %d minutes.\n\n" $((test_dur/60)) | tee -a "$summary_log"
+printf "✅ Best Loss Model test finished. Time cost: %d minutes.\n\n" $((test_dur/60)) | tee -a "$summary_log"
 
 # ==============================================================
 #                  总结

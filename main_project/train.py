@@ -46,9 +46,9 @@ def get_parse():
     parser.add_argument('--share', action='store_true', default=True)
     parser.add_argument('--block', default=3, type=int)
 
-    # [新增/修改] 关键正则化参数接口 (为了鲁棒性)
-    # 注意：默认值给得比较保守，实际训练通过shell脚本传入 aggressive 的值
+    # [关键正则化参数]
     parser.add_argument('--drop_path_rate', default=0.1, type=float, help='Drop Path Rate for ViT')
+    parser.add_argument('--weight_decay', default=5e-4, type=float, help='Weight Decay')
 
     # 优化参数
     parser.add_argument('--num_epochs', default=120, type=int)
@@ -59,7 +59,6 @@ def get_parse():
     parser.add_argument('--moving_avg', default=1.0, type=float)
     
     # AMP
-    # 默认设为 False
     parser.add_argument('--fp16', action='store_true', default=False)
     parser.add_argument('--autocast', action='store_true', default=False)
 
@@ -85,8 +84,12 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
 
     print(f"Training Strategy Confirmed:")
     print(f"  >>> DropPath Rate: {opt.drop_path_rate} (High for Robustness)")
+    # 现在 opt.weight_decay 存在了，不会报错
     print(f"  >>> Weight Decay : {opt.weight_decay} (High for Regularization)")
     print(f"  >>> Autocast     : {opt.autocast}")
+
+    # [新增] 初始化最佳 loss 记录
+    best_loss = float('inf')
 
     for epoch in range(num_epochs):
         epoch_start = time.time()
@@ -103,7 +106,7 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
         running_loss = 0.0
         total_samples = 0
 
-        running_corrects = 0  # 用于计算 train_acc（top‑1）
+        running_corrects = 0 
 
         # 使用 enumerate 以便获取 batch 索引
         for batch_idx, (data, data2, data3) in enumerate(dataloaders):
@@ -146,10 +149,8 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
                 f_triplet_loss = cal_triplet_loss(
                     features, features2, labels, triplet_loss_fn, split_num
                 )
-                # 此时 outputs 变成了 tuple(logits, feat)，我们需要把 logits 取出来覆盖 outputs
                 outputs, outputs2 = outputs[0], outputs2[0]
             else:
-                # 如果没有 triplet loss，模型输出依然是 tuple，也需要取出 logits
                 if isinstance(outputs, (list, tuple)):
                     outputs = outputs[0]
                 if isinstance(outputs2, (list, tuple)):
@@ -158,7 +159,6 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
                     outputs3 = outputs3[0]
 
             # ---------- 分类损失 + KL ----------
-            # 注意：经过上面的处理，outputs 已经是 logits Tensor 了
             if opt.views == 2:
                 cls_loss = cal_loss(outputs, labels, criterion) + \
                            cal_loss(outputs2, labels3, criterion)
@@ -186,9 +186,8 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
             running_triplet += f_triplet_loss.item() * now_batch_size
             running_kl_loss += kl_loss.item() * now_batch_size
 
-            # ---------- 计算准确率 (修复了 TypeError) ----------
+            # ---------- 计算准确率 ----------
             with torch.no_grad():
-                # 再次做安全检查，确保 score 是 Tensor
                 if isinstance(outputs, (list, tuple)):
                     score = outputs[0]
                 else:
@@ -198,7 +197,7 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
                 batch_correct = torch.sum(preds == labels).item()
                 running_corrects += batch_correct
 
-            # ---------- [新增] 实时打印 (每20个batch打印一次) ----------
+            # ---------- 实时打印 ----------
             if (batch_idx + 1) % 20 == 0:
                 print("  Step[{}/{}] Loss: {:.4f} (Cls: {:.3f} Tri: {:.3f}) Acc: {:.2f}%".format(
                     batch_idx + 1, len(dataloaders),
@@ -229,9 +228,20 @@ def train_model(model, opt, optimizer, scheduler, dataloaders, dataset_sizes):
         print("  kl_loss      : {:.4f}".format(epoch_kl))
         print("  train_acc    : {:.4f}".format(epoch_acc))
         print("  epoch_time   : {:.0f}m {:.0f}s".format(epoch_time // 60, epoch_time % 60))
+
+        # =========================================================
+        #   [关键逻辑] 保存最后30个epoch中 loss 最小的模型
+        # =========================================================
+        if epoch >= num_epochs - 30:
+            if epoch_loss < best_loss:
+                best_loss = epoch_loss
+                # 保存名称为 net_best_loss.pth
+                save_network(model, opt.name, 'best_loss')
+                print("  >>> [Best Loss Found] Loss={:.4f} at epoch {}, model saved as net_best_loss.pth".format(best_loss, epoch))
+        
         print('-' * 30)
 
-        # 学习率调度 & 保存
+        # 学习率调度 & 常规保存
         scheduler.step()
 
         if (epoch + 1) % 10 == 0 or epoch == num_epochs - 1:

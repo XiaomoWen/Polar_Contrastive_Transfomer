@@ -1,0 +1,114 @@
+[Resize(size=(384, 384), interpolation=bicubic, max_size=None, antialias=warn), Pad(padding=0, fill=0, padding_mode=edge), RandomCrop(size=(384, 384), padding=None), RandomHorizontalFlip(p=0.5), ToTensor(), Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]), <datasets.random_erasing.RandomErasing object at 0x7fb818d6edc0>]
+Building PCT Model | Views: 2, Block: 3
+=> [Model Strategy] Using PCT (Polar Transform) strictly for Dual-View.
+=========== Building Model: PCT (Polar-Contrastive Transformer) ===========
+=> using Transformer_type: ViT-Small-RoPE-OFFICIAL (timm) as backbone
+=> pretrain: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] loading pretrain from: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] load_state_dict done. missing=0, unexpected=0
+=> Optimizer Strategy: SGD with Differential Learning Rates.
+   - Backbone LR: 0.030000 (0.3x)
+   - Heads LR:    0.100000 (1.0x)
+---------- Start Training -------------
+Training Strategy Confirmed:
+  >>> DropPath Rate: 0.25 (High for Robustness)
+  >>> Weight Decay : 0.0005 (High for Regularization)
+  >>> Autocast     : False
+Epoch 0/139
+----------
+Epoch 0 summary:
+  total_loss   : 14.8210
+  cls_loss     : 13.1115
+  triplet_loss : 0.3799
+  kl_loss      : 0.0000
+  train_acc    : 0.0000
+  epoch_time   : 0m 21s
+------------------------------
+Training elapsed: 0m 21s
+
+Epoch 1/139
+----------
+Epoch 1 summary:
+  total_loss   : 14.0565
+  cls_loss     : 12.5184
+  triplet_loss : 0.3418
+  kl_loss      : 0.0000
+  train_acc    : 0.0357
+  epoch_time   : 0m 19s
+------------------------------
+Training elapsed: 0m 40s
+
+Epoch 2/139
+----------
+Epoch 2 summary:
+  total_loss   : 12.5847
+  cls_loss     : 11.1758
+  triplet_loss : 0.3131
+  kl_loss      : 0.0000
+  train_acc    : 0.1637
+  epoch_time   : 0m 20s
+------------------------------
+Training elapsed: 0m 59s
+
+Epoch 3/139
+----------
+Epoch 3 summary:
+  total_loss   : 10.8158
+  cls_loss     : 9.5024
+  triplet_loss : 0.2919
+  kl_loss      : 0.0000
+  train_acc    : 0.2961
+  epoch_time   : 0m 20s
+------------------------------
+Training elapsed: 1m 20s
+
+Epoch 4/139
+----------
+Epoch 4 summary:
+  total_loss   : 9.0157
+  cls_loss     : 7.7869
+  triplet_loss : 0.2731
+  kl_loss      : 0.0000
+  train_acc    : 0.4970
+  epoch_time   : 0m 18s
+------------------------------
+Training elapsed: 1m 38s
+
+Epoch 5/139
+----------
+Epoch 5 summary:
+  total_loss   : 7.4545
+  cls_loss     : 6.2753
+  triplet_loss : 0.2621
+  kl_loss      : 0.0000
+  train_acc    : 0.6815
+  epoch_time   : 0m 19s
+------------------------------
+Training elapsed: 1m 56s
+
+Epoch 6/139
+----------
+Epoch 6 summary:
+  total_loss   : 5.9162
+  cls_loss     : 4.8079
+  triplet_loss : 0.2463
+  kl_loss      : 0.0000
+  train_acc    : 0.7932
+  epoch_time   : 0m 18s
+------------------------------
+Training elapsed: 2m 14s
+
+Epoch 7/139
+----------
+Epoch 7 summary:
+  total_loss   : 4.8219
+  cls_loss     : 3.7442
+  triplet_loss : 0.2395
+  kl_loss      : 0.0000
+  train_acc    : 0.8646
+  epoch_time   : 0m 20s
+------------------------------
+Training elapsed: 2m 34s
+
+Epoch 8/139
+----------
