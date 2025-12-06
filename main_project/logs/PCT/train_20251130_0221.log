@@ -1,0 +1,28 @@
+[Resize(size=(224, 224), interpolation=bicubic, max_size=None, antialias=warn), Pad(padding=0, fill=0, padding_mode=edge), RandomCrop(size=(224, 224), padding=None), RandomHorizontalFlip(p=0.5), ToTensor(), Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])]
+Building PCT Model | Views: 2, Block: 3
+=> [Model Strategy] Using PCT (Polar Transform) strictly for Dual-View.
+=========== Building Model: PCT (Polar-Contrastive Transformer) ===========
+=> using Transformer_type: ViT-Small-RoPE-OFFICIAL (timm) as backbone
+=> pretrain: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] loading pretrain from: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] load_state_dict done. missing=0, unexpected=0
+=> Optimizer Strategy: AdamW with Differential Learning Rates.
+   - Backbone LR: 0.000300 (0.3x)
+   - Heads LR:    0.001000 (1.0x)
+=> Scheduler Strategy: Warmup (10 eps) + Cosine Annealing
+   - Total Epochs: 120
+   - Min LR: 1e-6
+---------- Start Training -------------
+Epoch 0/119
+----------
+Traceback (most recent call last):
+  File "train.py", line 229, in <module>
+    train_model(model, opt, optimizer_ft, exp_lr_scheduler, dataloaders, dataset_sizes)
+  File "train.py", line 172, in train_model
+    _, preds = torch.max(outputs, 1)
+TypeError: max() received an invalid combination of arguments - got (list, int), but expected one of:
+ * (Tensor input, *, Tensor out)
+ * (Tensor input, Tensor other, *, Tensor out)
+ * (Tensor input, int dim, bool keepdim, *, tuple of Tensors out)
+ * (Tensor input, name dim, bool keepdim, *, tuple of Tensors out)
+

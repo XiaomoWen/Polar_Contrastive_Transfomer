@@ -1,0 +1,312 @@
+[Resize(size=(224, 224), interpolation=bicubic, max_size=None, antialias=warn), Pad(padding=0, fill=0, padding_mode=edge), RandomCrop(size=(224, 224), padding=None), RandomHorizontalFlip(p=0.5), ToTensor(), Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])]
+Building PCT Model | Views: 2, Block: 3
+=> [Model Strategy] Using PCT (Polar Transform) strictly for Dual-View.
+=========== Building Model: PCT (Polar-Contrastive Transformer) ===========
+=> using Transformer_type: ViT-Small-RoPE-OFFICIAL (timm) as backbone
+=> pretrain: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] loading pretrain from: /home/ps/Code/wxm_project/Polar_Contrastive_Transfomer/main_project/pretrain_model/vit_small_patch16_rope_224_naver_in1k.pth
+=> [OfficialRoPEViTSmall] load_state_dict done. missing=0, unexpected=0
+=> Optimizer Strategy: AdamW with Differential Learning Rates.
+   - Backbone LR: 0.000090 (0.3x)
+   - Heads LR:    0.000300 (1.0x)
+=> Scheduler Strategy: Warmup (10 eps) + Cosine Annealing
+   - Total Epochs: 120
+   - Min LR: 1e-6
+---------- Start Training -------------
+Epoch 0/119
+----------
+Epoch 0: loss=12.3429
+Training complete in 0m 10s
+
+Epoch 1/119
+----------
+Epoch 1: loss=12.3207
+Training complete in 0m 19s
+
+Epoch 2/119
+----------
+Epoch 2: loss=12.2883
+Training complete in 0m 27s
+
+Epoch 3/119
+----------
+Epoch 3: loss=12.2329
+Training complete in 0m 36s
+
+Epoch 4/119
+----------
+Epoch 4: loss=12.1692
+Training complete in 0m 45s
+
+Epoch 5/119
+----------
+Epoch 5: loss=12.0754
+Training complete in 0m 54s
+
+Epoch 6/119
+----------
+Epoch 6: loss=11.9456
+Training complete in 1m 2s
+
+Epoch 7/119
+----------
+Epoch 7: loss=11.7816
+Training complete in 1m 11s
+
+Epoch 8/119
+----------
+Epoch 8: loss=11.5789
+Training complete in 1m 20s
+
+Epoch 9/119
+----------
+Epoch 9: loss=11.3363
+Training complete in 1m 29s
+
+Epoch 10/119
+----------
+Epoch 10: loss=11.0737
+Training complete in 1m 37s
+
+Epoch 11/119
+----------
+Epoch 11: loss=10.7970
+Training complete in 1m 46s
+
+Epoch 12/119
+----------
+Epoch 12: loss=10.5089
+Training complete in 1m 55s
+
+Epoch 13/119
+----------
+Epoch 13: loss=10.2501
+Training complete in 2m 3s
+
+Epoch 14/119
+----------
+Epoch 14: loss=9.9720
+Training complete in 2m 12s
+
+Epoch 15/119
+----------
+Epoch 15: loss=9.6998
+Training complete in 2m 21s
+
+Epoch 16/119
+----------
+Epoch 16: loss=9.4378
+Training complete in 2m 29s
+
+Epoch 17/119
+----------
+Epoch 17: loss=9.1665
+Training complete in 2m 37s
+
+Epoch 18/119
+----------
+Epoch 18: loss=8.9141
+Training complete in 2m 45s
+
+Epoch 19/119
+----------
+Epoch 19: loss=8.6647
+Training complete in 2m 53s
+
+Epoch 20/119
+----------
+Epoch 20: loss=8.4242
+Training complete in 3m 1s
+
+Epoch 21/119
+----------
+Epoch 21: loss=8.1639
+Training complete in 3m 9s
+
+Epoch 22/119
+----------
+Epoch 22: loss=7.9039
+Training complete in 3m 18s
+
+Epoch 23/119
+----------
+Epoch 23: loss=7.6628
+Training complete in 3m 27s
+
+Epoch 24/119
+----------
+Epoch 24: loss=7.4343
+Training complete in 3m 35s
+
+Epoch 25/119
+----------
+Epoch 25: loss=7.2192
+Training complete in 3m 43s
+
+Epoch 26/119
+----------
+Epoch 26: loss=6.9638
+Training complete in 3m 52s
+
+Epoch 27/119
+----------
+Epoch 27: loss=6.7489
+Training complete in 4m 1s
+
+Epoch 28/119
+----------
+Epoch 28: loss=6.5045
+Training complete in 4m 10s
+
+Epoch 29/119
+----------
+Epoch 29: loss=6.3164
+Training complete in 4m 19s
+
+Epoch 30/119
+----------
+Epoch 30: loss=6.1035
+Training complete in 4m 27s
+
+Epoch 31/119
+----------
+Epoch 31: loss=5.8910
+Training complete in 4m 36s
+
+Epoch 32/119
+----------
+Epoch 32: loss=5.6873
+Training complete in 4m 45s
+
+Epoch 33/119
+----------
+Epoch 33: loss=5.4735
+Training complete in 4m 54s
+
+Epoch 34/119
+----------
+Epoch 34: loss=5.2902
+Training complete in 5m 2s
+
+Epoch 35/119
+----------
+Epoch 35: loss=5.0910
+Training complete in 5m 10s
+
+Epoch 36/119
+----------
+Epoch 36: loss=4.9218
+Training complete in 5m 19s
+
+Epoch 37/119
+----------
+Epoch 37: loss=4.7385
+Training complete in 5m 28s
+
+Epoch 38/119
+----------
+Epoch 38: loss=4.5840
+Training complete in 5m 37s
+
+Epoch 39/119
+----------
+Epoch 39: loss=4.4122
+Training complete in 5m 45s
+
+Epoch 40/119
+----------
+Epoch 40: loss=4.2514
+Training complete in 5m 52s
+
+Epoch 41/119
+----------
+Epoch 41: loss=4.0743
+Training complete in 5m 59s
+
+Epoch 42/119
+----------
+Epoch 42: loss=3.9295
+Training complete in 6m 7s
+
+Epoch 43/119
+----------
+Epoch 43: loss=3.8020
+Training complete in 6m 16s
+
+Epoch 44/119
+----------
+Epoch 44: loss=3.6278
+Training complete in 6m 24s
+
+Epoch 45/119
+----------
+Epoch 45: loss=3.4793
+Training complete in 6m 33s
+
+Epoch 46/119
+----------
+Epoch 46: loss=3.3651
+Training complete in 6m 41s
+
+Epoch 47/119
+----------
+Epoch 47: loss=3.2576
+Training complete in 6m 50s
+
+Epoch 48/119
+----------
+Epoch 48: loss=3.1356
+Training complete in 6m 59s
+
+Epoch 49/119
+----------
+Epoch 49: loss=3.0384
+Training complete in 7m 8s
+
+Epoch 50/119
+----------
+Epoch 50: loss=2.8988
+Training complete in 7m 17s
+
+Epoch 51/119
+----------
+Epoch 51: loss=2.8394
+Training complete in 7m 26s
+
+Epoch 52/119
+----------
+Epoch 52: loss=2.7105
+Training complete in 7m 35s
+
+Epoch 53/119
+----------
+Epoch 53: loss=2.6189
+Training complete in 7m 44s
+
+Epoch 54/119
+----------
+Epoch 54: loss=2.5042
+Training complete in 7m 53s
+
+Epoch 55/119
+----------
+Epoch 55: loss=2.4451
+Training complete in 8m 2s
+
+Epoch 56/119
+----------
+Epoch 56: loss=2.4076
+Training complete in 8m 10s
+
+Epoch 57/119
+----------
+Epoch 57: loss=2.2720
+Training complete in 8m 19s
+
+Epoch 58/119
+----------
+Epoch 58: loss=2.2095
+Training complete in 8m 28s
+
+Epoch 59/119
+----------

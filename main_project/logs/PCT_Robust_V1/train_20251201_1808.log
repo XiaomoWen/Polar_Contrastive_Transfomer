@@ -1,0 +1,13 @@
+usage: train.py [-h] [--gpu_ids GPU_IDS] [--name NAME] [--data_dir DATA_DIR]
+                [--train_all] [--color_jitter] [--num_worker NUM_WORKER]
+                [--batchsize BATCHSIZE] [--pad PAD] [--h H] [--w W]
+                [--views VIEWS] [--erasing_p ERASING_P] [--DA]
+                [--backbone BACKBONE] [--pretrain_path PRETRAIN_PATH]
+                [--share] [--block BLOCK] [--drop_path_rate DROP_PATH_RATE]
+                [--weight_decay WEIGHT_DECAY] [--num_epochs NUM_EPOCHS]
+                [--steps STEPS] [--lr LR] [--warm_epoch WARM_EPOCH]
+                [--warmup_epochs WARMUP_EPOCHS] [--moving_avg MOVING_AVG]
+                [--fp16] [--autocast] [--kl_loss]
+                [--triplet_loss TRIPLET_LOSS]
+                [--triplet_weight TRIPLET_WEIGHT] [--sample_num SAMPLE_NUM]
+train.py: error: argument --triplet_weight: invalid float value: ''
