@@ -1,5 +1,5 @@
 # Towards Real-World Cross-View Geo-Localization: Robust Alignment via Geometric-Semantic Synergy
-### 💡This is a branch for testing function on the server, maintained by `XiaomoWen, NJUST-Automation`
+#### 💡This is a branch for testing function on the server, maintained by `XiaomoWen, NJUST-Automation`
 
 > Here is the code repository for the remote sensing project of the 2026 College Students' Innovation and Enterprenuership Competition. The copyright belongs to the team led by Professor Bai Hongyang from the School of Energy and Engineering, NJUST. Addtionally, this paper is under the guidance of Teacher Guo Shuai.
 
